@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          pr-test
+          tlqkf
         </a>
       </header>
     </div>
