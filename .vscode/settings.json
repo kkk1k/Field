@@ -1,6 +1,7 @@
 {
   "editor.tokenColorCustomizations": {
     "comments": "#eae0b997",
-    "textMateRules": []
+    "textMateRules": [],
+    "editor.formatOnSave": true
   }
 }
