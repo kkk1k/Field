@@ -1,15 +1,14 @@
 import React from "react";
+import {Routes, Route} from "react-router-dom";
+import MainPage from "./pages/MainPage";
+import AboutField from "./pages/AboutField";
 
 function App() {
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      </header>
-    </div>
+    <Routes>
+      <Route path='/' element={<MainPage />} />
+      <Route path='/about' element={<AboutField />} />
+    </Routes>
   );
 }
 
