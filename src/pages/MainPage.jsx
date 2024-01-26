@@ -4,6 +4,7 @@ function MainPage() {
   return (
     <div>
       <h1>main</h1>
+      <span>test</span>
     </div>
   );
 }
