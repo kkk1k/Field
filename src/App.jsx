@@ -7,6 +7,7 @@ import AboutField from "./pages/AboutField";
 import GlobalStyle from "./GlobalStyle";
 import FieldCamp from "./pages/FieldCamp";
 import FieldNews from "./pages/FieldNews";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/about' element={<AboutField />} />
         <Route path='/camp' element={<FieldCamp />} />
         <Route path='/news' element={<FieldNews />} />
+        <Route path='/contact' element={<Contact />} />
       </Routes>
     </ThemeProvider>
   );
