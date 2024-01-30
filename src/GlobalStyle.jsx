@@ -1,7 +1,11 @@
 import {createGlobalStyle} from "styled-components";
+import theme from "./theme";
 
 const GlobalStyle = createGlobalStyle`
-html,
+html{
+    background : ${theme.colors.primary};
+    color: ${theme.colors.white}
+},
 body,
 div,
 span,
@@ -9,7 +13,9 @@ applet,
 object,
 iframe,
 h1,
-h2,
+h2
+        
+,
 h3,
 h4,
 h5,
