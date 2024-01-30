@@ -8,17 +8,24 @@ import GlobalStyle from "./GlobalStyle";
 import FieldCamp from "./pages/FieldCamp";
 import FieldNews from "./pages/FieldNews";
 import Contact from "./pages/Contact";
+import Sns from "./pages/Sns";
+import Layout from "./layout/Layout";
+import Album from "./pages/Album";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Routes>
-        <Route path='/' element={<MainPage />} />
-        <Route path='/about' element={<AboutField />} />
-        <Route path='/camp' element={<FieldCamp />} />
-        <Route path='/news' element={<FieldNews />} />
-        <Route path='/contact' element={<Contact />} />
+        <Route element={<Layout />}>
+          <Route path='/' element={<MainPage />} />
+          <Route path='/about' element={<AboutField />} />
+          <Route path='/camp' element={<FieldCamp />} />
+          <Route path='/news' element={<FieldNews />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/sns' element={<Sns />} />
+          <Route path='/album' element={<Album />} />
+        </Route>
       </Routes>
     </ThemeProvider>
   );

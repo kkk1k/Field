@@ -1,7 +1,13 @@
 import React from "react";
+import styled from "styled-components";
 
-function Header() {
-  return <div>Header</div>;
+const TopInfo = styled.div`
+  background-color: black;
+  height: 4rem;
+  position: sticky;
+  top: 0;
+`;
+
+export default function Header() {
+  return <TopInfo>Header</TopInfo>;
 }
-
-export default Header;
