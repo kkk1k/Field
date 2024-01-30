@@ -2,9 +2,109 @@ import React, {useRef, useState} from "react";
 import styled from "styled-components";
 import ContactModal from "./ContactModal";
 
+const Title = styled.p`
+  margin: 0.5rem 0 0.2rem 0;
+`;
+
 const Form = styled.form`
-  padding: 2rem;
-  backgroud-color: white;
+  width: 80vw;
+  margin: 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+  section {
+    padding: 0 0 0.5rem 0;
+    justify-content: left;
+  }
+`;
+
+const Type = styled.section`
+  display: flex;
+  align-items: center;
+  select {
+    color: gray;
+    margin: 0 0 0 0.5rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 4rem;
+    padding: 0.5em 0.3em;
+    appearance: none;
+    background: url("downward-arrow.png") no-repeat 95% 50%;
+    background-size: 20px 20px;
+    border: none;
+    border-bottom: 2px solid gray;
+    font-size: 0.9rem;
+  }
+`;
+
+const PhoneContanier = styled.section`
+  display: flex;
+  align-items: center;
+
+  select {
+    color: gray;
+    margin: 0 1rem 0 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 3.5rem;
+    padding: 0.5em 0.3em;
+    appearance: none;
+    background: url("downward-arrow.png") no-repeat 95% 50%;
+    background-size: 20px 20px;
+    border: none;
+    border-bottom: 2px solid gray;
+    font-size: 0.9rem;
+  }
+  input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 5rem;
+    border: none;
+    height: 2rem;
+    margin: 0 0.7rem;
+  }
+`;
+
+const EmailContanier = styled(PhoneContanier)`
+  select {
+    margin: 0 0 0 0.5rem;
+    width: 5.5rem;
+  }
+  input:disabled {
+    color: black;
+  }
+  input {
+    width: 5rem;
+    margin: 0;
+  }
+`;
+
+const TextBox = styled.section`
+  input {
+    width: 90%;
+    height: 1.5rem;
+  }
+`;
+
+const TextAreaBox = styled.section`
+  textarea {
+    width: 90%;
+    height: 5rem;
+  }
+`;
+
+const SubmitButton = styled.div`
+  display: flex;
+  justify-content: center;
+  button {
+    font-size: 0.75rem;
+    color: white;
+    appearance: none;
+    border: none;
+    width: 5rem;
+    height: 2rem;
+    margin: 0 0.5rem 0 0;
+    background-color: gray;
+  }
 `;
 
 export default function ContactForm() {
@@ -69,21 +169,21 @@ export default function ContactForm() {
   return (
     <>
       <Form onSubmit={event => enteredHandler(event)}>
-        <section>
+        <Type>
           <h4>문의 유형</h4>
           <select id='firstPhoneNumber' name='firstPhoneNumber' ref={enteredType}>
             <option value='후원'>후원</option>
             <option value='닌뭔데'>닌뭔데</option>
           </select>
-        </section>
+        </Type>
 
-        <section>
-          <h4>이름 (회사)</h4>
+        <Title>이름 (회사)</Title>
+        <TextBox>
           <input type='text' ref={enteredName} />
-        </section>
+        </TextBox>
 
-        <div>
-          <h4>연락처</h4>
+        <Title>연락처</Title>
+        <PhoneContanier>
           <select id='firstPhoneNumber' name='firstPhoneNumber' ref={enteredFirstPhoneNumber}>
             <option value='010'>010</option>
             <option value='01'>01</option>
@@ -93,11 +193,12 @@ export default function ContactForm() {
           -
           <input type='text' ref={enteredSecondPhoneNumber} />-
           <input type='text' ref={enteredThirdPhoneNumber} />
-        </div>
+        </PhoneContanier>
 
-        <div>
-          <h4>E-mail</h4>
-          <input type='text' ref={enteredFrontEmail} /> @
+        <Title>E-mail</Title>
+        <EmailContanier>
+          <input type='text' ref={enteredFrontEmail} />
+          <p style={{padding: "0.4rem"}}>@</p>
           {emailForm === "" ? (
             <input
               type='text'
@@ -119,18 +220,20 @@ export default function ContactForm() {
             <option value='gmail.com'>gmail.com</option>
             <option value='hello.com'>hello.com</option>
           </select>
-        </div>
+        </EmailContanier>
 
-        <div>
-          <h4> 제목 </h4>
+        <Title> 제목 </Title>
+        <TextBox>
           <input type='text' ref={enteredTitle} />
-        </div>
+        </TextBox>
 
-        <div>
-          <h4> 내용 </h4>
+        <Title> 내용 </Title>
+        <TextAreaBox>
           <textarea ref={enteredText} />
-        </div>
-        <button type='submit'>Submit</button>
+        </TextAreaBox>
+        <SubmitButton>
+          <button type='submit'>제출하기!</button>
+        </SubmitButton>
       </Form>
       {isModal && <ContactModal onClose={() => modalCloseHandler()} />}
     </>
