@@ -2,6 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+const SnsContanier = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  margin: 5%;
+`;
+
 const InfoContanier = styled.div`
   display: flex;
   flex-direction: column;
@@ -41,7 +49,7 @@ function SnsInfo({info, children}) {
   const {name, imageAlt, image, linkTitle, link, title, summary, description} = info;
 
   return (
-    <>
+    <SnsContanier>
       <TitleContanier>
         <img src={image} alt={imageAlt} width={35} height={25} />
         <h3>{name}</h3>
@@ -58,7 +66,7 @@ function SnsInfo({info, children}) {
         <p>{summary}</p>
         <p>{description}</p>
       </InfoContanier>
-    </>
+    </SnsContanier>
   );
 }
 

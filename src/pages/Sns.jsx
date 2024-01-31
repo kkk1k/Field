@@ -12,7 +12,7 @@ function Line() {
       <div
         style={{
           backgroundColor: theme.colors.white,
-          width: "80vw",
+          width: "90%",
           height: "0.05rem",
           margin: "2rem 0 1rem 0",
           display: "flex",

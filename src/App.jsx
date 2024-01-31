@@ -8,9 +8,9 @@ import GlobalStyle from "./GlobalStyle";
 import FieldCamp from "./pages/FieldCamp";
 import FieldNews from "./pages/FieldNews";
 import Contact from "./pages/Contact";
-import Sns from "./pages/Sns";
 import Layout from "./layout/Layout";
 import Album from "./pages/Album";
+import Sns from "./pages/Sns";
 
 function App() {
   return (
@@ -23,8 +23,8 @@ function App() {
           <Route path='/camp' element={<FieldCamp />} />
           <Route path='/news' element={<FieldNews />} />
           <Route path='/contact' element={<Contact />} />
-          <Route path='/sns' element={<Sns />} />
           <Route path='/album' element={<Album />} />
+          <Route path='/sns' element={<Sns />} />
         </Route>
       </Routes>
     </ThemeProvider>
