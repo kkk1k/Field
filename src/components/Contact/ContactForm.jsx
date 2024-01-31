@@ -1,18 +1,24 @@
 import React, {useRef, useState} from "react";
 import styled from "styled-components";
+import {useNavigate} from "react-router-dom";
 import ContactModal from "./ContactModal";
+
+const FormContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
 
 const Title = styled.p`
   margin: 0.5rem 0 0.2rem 0;
 `;
 
 const Form = styled.form`
-  width: 80vw;
-  margin: 2rem 3rem;
+  width: 80%;
   display: flex;
   flex-direction: column;
   section {
-    padding: 0 0 0.5rem 0;
+    padding: 0 0 1rem 0;
     justify-content: left;
   }
 `;
@@ -22,31 +28,33 @@ const Type = styled.section`
   align-items: center;
   select {
     color: gray;
-    margin: 0 0 0 0.5rem;
+    margin: 0 0 0 0.8rem;
     -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 4rem;
-    padding: 0.5em 0.3em;
+    width: 5rem;
+    padding: 0.5em 0.5em;
     appearance: none;
     background: url("downward-arrow.png") no-repeat 95% 50%;
-    background-size: 20px 20px;
+    background-size: 1.5rem 1.5rem;
     border: none;
-    border-bottom: 2px solid gray;
-    font-size: 0.9rem;
+    border-bottom: 0.125rem solid gray;
+    font-size: 1rem;
+  }
+  input {
   }
 `;
 
 const PhoneContanier = styled.section`
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 100%;
 
   select {
+    flex-grow: 1;
     color: gray;
     margin: 0 1rem 0 0;
     -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 3.5rem;
-    padding: 0.5em 0.3em;
+    padding: 0.5em 0.5em;
     appearance: none;
     background: url("downward-arrow.png") no-repeat 95% 50%;
     background-size: 20px 20px;
@@ -55,40 +63,50 @@ const PhoneContanier = styled.section`
     font-size: 0.9rem;
   }
   input {
+    flex-grow: 1;
     -webkit-appearance: none;
     -moz-appearance: none;
     width: 5rem;
     border: none;
     height: 2rem;
-    margin: 0 0.7rem;
+    margin: 0 0.5rem;
+    padding: 0 0.25rem;
+  }
+  .lastInput {
+    margin-right: 0px;
   }
 `;
 
 const EmailContanier = styled(PhoneContanier)`
   select {
     margin: 0 0 0 0.5rem;
-    width: 5.5rem;
   }
   input:disabled {
     color: black;
   }
   input {
-    width: 5rem;
     margin: 0;
   }
 `;
 
 const TextBox = styled.section`
   input {
-    width: 90%;
-    height: 1.5rem;
+    padding: 0;
+    width: 100%;
+    height: 2rem;
+    border: none;
+    padding: 0.2rem 0.5rem;
+    box-sizing: border-box;
   }
 `;
 
 const TextAreaBox = styled.section`
   textarea {
-    width: 90%;
-    height: 5rem;
+    box-sizing: border-box;
+    width: 100%;
+    height: 8rem;
+    border: none;
+    padding: 0.5rem;
   }
 `;
 
@@ -100,14 +118,15 @@ const SubmitButton = styled.div`
     color: white;
     appearance: none;
     border: none;
-    width: 5rem;
-    height: 2rem;
-    margin: 0 0.5rem 0 0;
+    width: 20%;
+    height: 3rem;
     background-color: gray;
   }
 `;
 
 export default function ContactForm() {
+  const navigate = useNavigate();
+
   const [emailForm, setEmailForm] = useState("");
   const [emailBack, setEmailBack] = useState("");
   const [isModal, setIsModal] = useState(false);
@@ -159,6 +178,7 @@ export default function ContactForm() {
     enteredText.current.value = "";
 
     console.log(summitedData);
+
     setIsModal(true);
   }
 
@@ -168,73 +188,75 @@ export default function ContactForm() {
 
   return (
     <>
-      <Form onSubmit={event => enteredHandler(event)}>
-        <Type>
-          <h4>문의 유형</h4>
-          <select id='firstPhoneNumber' name='firstPhoneNumber' ref={enteredType}>
-            <option value='후원'>후원</option>
-            <option value='닌뭔데'>닌뭔데</option>
-          </select>
-        </Type>
+      <FormContainer>
+        <Form onSubmit={event => enteredHandler(event)}>
+          <Type>
+            <h4>문의 유형</h4>
+            <select id='firstPhoneNumber' name='firstPhoneNumber' ref={enteredType}>
+              <option value='후원'>후원</option>
+              <option value='닌뭔데'>닌뭔데</option>
+            </select>
+          </Type>
 
-        <Title>이름 (회사)</Title>
-        <TextBox>
-          <input type='text' ref={enteredName} />
-        </TextBox>
+          <Title>이름 (회사)</Title>
+          <TextBox>
+            <input type='text' ref={enteredName} />
+          </TextBox>
 
-        <Title>연락처</Title>
-        <PhoneContanier>
-          <select id='firstPhoneNumber' name='firstPhoneNumber' ref={enteredFirstPhoneNumber}>
-            <option value='010'>010</option>
-            <option value='01'>01</option>
-            <option value='02'>02</option>
-            <option value='03'>03</option>
-          </select>
-          -
-          <input type='text' ref={enteredSecondPhoneNumber} />-
-          <input type='text' ref={enteredThirdPhoneNumber} />
-        </PhoneContanier>
+          <Title>연락처</Title>
+          <PhoneContanier>
+            <select id='firstPhoneNumber' name='firstPhoneNumber' ref={enteredFirstPhoneNumber}>
+              <option value='010'>010</option>
+              <option value='01'>01</option>
+              <option value='02'>02</option>
+              <option value='03'>03</option>
+            </select>
+            -
+            <input type='text' ref={enteredSecondPhoneNumber} />-
+            <input type='text' ref={enteredThirdPhoneNumber} className='lastInput' />
+          </PhoneContanier>
 
-        <Title>E-mail</Title>
-        <EmailContanier>
-          <input type='text' ref={enteredFrontEmail} />
-          <p style={{padding: "0.4rem"}}>@</p>
-          {emailForm === "" ? (
-            <input
-              type='text'
-              value={emailBack}
-              onChange={emailBackHandler}
-              ref={enteredBackEmail}
-            />
-          ) : (
-            <input type='text' value={emailForm} disabled ref={enteredBackEmail} />
-          )}
-          <select
-            id='emailAdrress'
-            name='emailAdrress'
-            value={emailForm}
-            onChange={emailFormHandler}
-          >
-            <option value=''>직접입력</option>
-            <option value='naver.com'>naver.com</option>
-            <option value='gmail.com'>gmail.com</option>
-            <option value='hello.com'>hello.com</option>
-          </select>
-        </EmailContanier>
+          <Title>E-mail</Title>
+          <EmailContanier>
+            <input type='text' ref={enteredFrontEmail} />
+            <p style={{padding: "0.4rem"}}>@</p>
+            {emailForm === "" ? (
+              <input
+                type='text'
+                value={emailBack}
+                onChange={emailBackHandler}
+                ref={enteredBackEmail}
+              />
+            ) : (
+              <input type='text' value={emailForm} disabled ref={enteredBackEmail} />
+            )}
+            <select
+              id='emailAdrress'
+              name='emailAdrress'
+              value={emailForm}
+              onChange={emailFormHandler}
+            >
+              <option value=''>직접입력</option>
+              <option value='naver.com'>naver.com</option>
+              <option value='gmail.com'>gmail.com</option>
+              <option value='hello.com'>hello.com</option>
+            </select>
+          </EmailContanier>
 
-        <Title> 제목 </Title>
-        <TextBox>
-          <input type='text' ref={enteredTitle} />
-        </TextBox>
+          <Title> 제목 </Title>
+          <TextBox>
+            <input type='text' ref={enteredTitle} />
+          </TextBox>
 
-        <Title> 내용 </Title>
-        <TextAreaBox>
-          <textarea ref={enteredText} />
-        </TextAreaBox>
-        <SubmitButton>
-          <button type='submit'>제출하기!</button>
-        </SubmitButton>
-      </Form>
+          <Title> 내용 </Title>
+          <TextAreaBox>
+            <textarea ref={enteredText} />
+          </TextAreaBox>
+          <SubmitButton>
+            <button type='submit'>제출하기!</button>
+          </SubmitButton>
+        </Form>
+      </FormContainer>
       {isModal && <ContactModal onClose={() => modalCloseHandler()} />}
     </>
   );
