@@ -3,13 +3,8 @@ import theme from "./theme";
 
 const GlobalStyle = createGlobalStyle`
 html{
-<<<<<<< HEAD
-    background: ${theme.colors.primary};
-    color: ${theme.colors.white};
-=======
     background : ${theme.colors.primary};
     color: ${theme.colors.white}
->>>>>>> 69d0eff0c35500ffbc5c97111783d4ce0033c83e
 },
 body,
 div,
