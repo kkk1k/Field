@@ -1,7 +1,11 @@
 import {createGlobalStyle} from "styled-components";
+import theme from "./theme";
 
 const GlobalStyle = createGlobalStyle`
-html,
+html{
+    background: ${theme.colors.primary};
+    color: ${theme.colors.white};
+},
 body,
 div,
 span,
