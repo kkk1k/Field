@@ -122,6 +122,9 @@ const SubmitButton = styled.div`
     height: 3rem;
     background-color: gray;
   }
+  button:hover {
+    cursor: pointer;
+  }
 `;
 
 export default function ContactForm() {
@@ -194,7 +197,8 @@ export default function ContactForm() {
             <h4>문의 유형</h4>
             <select id='firstPhoneNumber' name='firstPhoneNumber' ref={enteredType}>
               <option value='후원'>후원</option>
-              <option value='닌뭔데'>닌뭔데</option>
+              <option value='문의'>문의</option>
+              <option value='기타'>기타</option>
             </select>
           </Type>
 
@@ -207,9 +211,23 @@ export default function ContactForm() {
           <PhoneContanier>
             <select id='firstPhoneNumber' name='firstPhoneNumber' ref={enteredFirstPhoneNumber}>
               <option value='010'>010</option>
-              <option value='01'>01</option>
               <option value='02'>02</option>
-              <option value='03'>03</option>
+              <option value='032'>032</option>
+              <option value='033'>033</option>
+              <option value='041'>041</option>
+              <option value='042'>042</option>
+              <option value='043'>043</option>
+              <option value='044'>044</option>
+              <option value='051'>051</option>
+              <option value='052'>052</option>
+              <option value='053'>053</option>
+              <option value='054'>054</option>
+              <option value='011'>010</option>
+              <option value='016'>01</option>
+              <option value='017'>02</option>
+              <option value='018'>03</option>
+              <option value='019'>03</option>
+              <option value='070'>03</option>
             </select>
             -
             <input type='text' ref={enteredSecondPhoneNumber} />-
@@ -238,8 +256,10 @@ export default function ContactForm() {
             >
               <option value=''>직접입력</option>
               <option value='naver.com'>naver.com</option>
+              <option value='daum.net'>daum.net</option>
               <option value='gmail.com'>gmail.com</option>
-              <option value='hello.com'>hello.com</option>
+              <option value='nate.com'>nate.com</option>
+              <option value='yahoo.co.kr'>yahoo.co.kr</option>
             </select>
           </EmailContanier>
 

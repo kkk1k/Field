@@ -1,6 +1,7 @@
 import React from "react";
 import {createPortal} from "react-dom";
 import styled from "styled-components";
+import theme from "../../theme";
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -8,7 +9,7 @@ const ModalBackground = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.35);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,17 +24,28 @@ const Modal = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
-  width: 40%;
-  height: 30%;
+  background-color: #535353;
+  height: 20%;
+  width: 50%;
 
   p {
-    color: red;
+    padding: 1.5rem;
+    font-size: 1.5rem;
+    color: ${theme.colors.white};
   }
 
   button {
-    color: blue;
+    appearance: none;
+    font-size: 1.5rem;
+    color: ${theme.colors.white};
     margin: 1rem;
+    background: ${theme.colors.black};
+    border: none;
+    padding: 0.4rem 0.5rem;
+    border-radius: 0.5rem;
+  }
+  button:hover {
+    cursor: pointer;
   }
 `;
 
@@ -48,9 +60,9 @@ export default function ContactModal(props) {
     return (
       <ModalBackground>
         <Modal>
-          <p>정상적으로 저장되었습니다.</p>
+          <p>등록되었습니다.</p>
           <button type='button' onClick={onClose}>
-            닫기
+            확인
           </button>
         </Modal>
       </ModalBackground>
