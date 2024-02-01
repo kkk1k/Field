@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import {Pagination, InputLabel, MenuItem, FormControl, Select} from "@mui/material";
 import styled from "styled-components";
+import {Pagination, InputLabel, MenuItem, FormControl, Select} from "@mui/material";
 import H2 from "../styles/H2";
 import Image from "../styles/Image";
 import searchIcon from "../assets/Search.png";

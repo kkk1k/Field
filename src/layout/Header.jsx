@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import {useNavigate, useLocation} from "react-router-dom";
-
 import styled from "styled-components";
+import fieldLogo from "../assets/fieldLogo.png";
+
 import theme from "../theme";
 
 const TopInfo = styled.header`
@@ -9,11 +10,11 @@ const TopInfo = styled.header`
   align-items: center;
   justify-content: space-between;
   background-color: black;
-  height: 4.5rem;
+  height: 10vh;
   position: sticky;
   top: 0;
   z-index: 10;
-  position: stiky;
+  position: sticky;
 `;
 
 const HomeLogo = styled.div`
@@ -23,8 +24,10 @@ const HomeLogo = styled.div`
   }
   display: flex;
   align-items: center;
+  justify-content: center;
   img {
     height: 2.25rem;
+    width: 2.25rem;
   }
   p {
     margin-left: 0.5rem;
@@ -97,7 +100,7 @@ export default function Header() {
   return (
     <TopInfo>
       <HomeLogo onClick={Homeredirect}>
-        <img src='FieldLogo.png' alt='필드로고' />
+        <img src={fieldLogo} alt='필드로고' />
         <p>FIELD</p>
       </HomeLogo>
       <button
