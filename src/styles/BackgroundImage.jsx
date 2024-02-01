@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const BackgroundImage = styled.section`
-  display: flex;
+  display: ${props => (props.display ? props.display : "flex")};
   height: ${props => (props.height ? props.height : "")};
   width: ${props => (props.width ? props.width : "")};
   position: ${props => (props.position ? props.position : "")};
