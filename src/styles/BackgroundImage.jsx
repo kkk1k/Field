@@ -2,9 +2,12 @@ import styled from "styled-components";
 
 const BackgroundImage = styled.section`
   display: flex;
+  height: ${props => (props.height ? props.height : "")};
+  width: ${props => (props.width ? props.width : "")};
   position: ${props => (props.position ? props.position : "")};
   background-image: ${props => (props.src ? `url(${props.src})` : "")};
   background-position: center;
+  object-fit: cover;
   padding-top: ${props => (props.pt ? props.pt : "")};
   padding-bottom: ${props => (props.pb ? props.pb : "")};
   padding-left: ${props => (props.pl ? props.pl : "")};
