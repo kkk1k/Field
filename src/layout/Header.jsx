@@ -10,11 +10,11 @@ const TopInfo = styled.header`
   align-items: center;
   justify-content: space-between;
   background-color: black;
-  height: 4.5rem;
+  height: 10vh;
   position: sticky;
   top: 0;
   z-index: 10;
-  position: stiky;
+  position: sticky;
 `;
 
 const HomeLogo = styled.div`
@@ -24,8 +24,10 @@ const HomeLogo = styled.div`
   }
   display: flex;
   align-items: center;
+  justify-content: center;
   img {
     height: 2.25rem;
+    width: 2.25rem;
   }
   p {
     margin-left: 0.5rem;

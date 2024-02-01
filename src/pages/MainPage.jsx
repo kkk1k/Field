@@ -25,7 +25,7 @@ function MainPage() {
         pl='2rem'
         pr='2rem'
         opacity='0.9'
-        height='100vh'
+        height='90vh'
       >
         <FlexCenter gap='0.5rem'>
           <H2 margin='0rem 0rem 0rem 0rem'>산업을 지휘하자</H2>
@@ -45,7 +45,7 @@ function MainPage() {
       </BackgroundImage>
 
       <FlexCenter>
-        <H2>our goal</H2>
+        <H2>OUR GOAL</H2>
         <Image src={logo} width='8.75rem' height='8.75rem' mb='15.625rem' mt='15.625rem' />
       </FlexCenter>
 

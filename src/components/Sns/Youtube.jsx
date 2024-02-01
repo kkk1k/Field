@@ -17,12 +17,11 @@ const youTubeInfo = {
 const VideoContainer = styled.section`
   display: flex;
   justify-content: center;
-  width: 100vw;
+  width: 85%;
   height: 30vh;
-  border-radius: 5rem;
   overflow: hidden;
   iframe {
-    width: 85%;
+    width: 100%;
     height: 100%;
   }
 `;

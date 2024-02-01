@@ -1,6 +1,5 @@
 import React, {useRef, useState} from "react";
 import styled from "styled-components";
-import {useNavigate} from "react-router-dom";
 import ContactModal from "./ContactModal";
 
 const FormContainer = styled.div`
@@ -128,8 +127,6 @@ const SubmitButton = styled.div`
 `;
 
 export default function ContactForm() {
-  const navigate = useNavigate();
-
   const [emailForm, setEmailForm] = useState("");
   const [emailBack, setEmailBack] = useState("");
   const [isModal, setIsModal] = useState(false);
@@ -179,8 +176,6 @@ export default function ContactForm() {
     enteredBackEmail.current.value = "";
     enteredTitle.current.value = "";
     enteredText.current.value = "";
-
-    console.log(summitedData);
 
     setIsModal(true);
   }

@@ -11,6 +11,7 @@ import Contact from "./pages/Contact";
 import Layout from "./layout/Layout";
 import Album from "./pages/Album";
 import Sns from "./pages/Sns";
+import "./index.css";
 
 function App() {
   return (
