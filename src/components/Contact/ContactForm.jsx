@@ -1,6 +1,6 @@
 import React, {useRef, useState} from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
-import {useNavigate} from "react-router-dom";
 import ContactModal from "./ContactModal";
 
 const FormContainer = styled.div`
@@ -119,7 +119,7 @@ const SubmitButton = styled.div`
     appearance: none;
     border: none;
     width: 20%;
-    height: 3rem;
+    height: 2rem;
     background-color: gray;
   }
   button:hover {
@@ -127,12 +127,11 @@ const SubmitButton = styled.div`
   }
 `;
 
-export default function ContactForm() {
-  const navigate = useNavigate();
-
+export default function ContactForm({agree}) {
   const [emailForm, setEmailForm] = useState("");
   const [emailBack, setEmailBack] = useState("");
   const [isModal, setIsModal] = useState(false);
+  const [isValid, setIsValid] = useState(false);
 
   const enteredType = useRef();
   const enteredName = useRef();
@@ -153,6 +152,18 @@ export default function ContactForm() {
     setEmailForm(event.target.value === "직접입력" ? "" : event.target.value);
   }
 
+  function EnteredTextValid(summitedData) {
+    if (
+      summitedData.name.trim() === "" ||
+      summitedData.text.trim() === "" ||
+      summitedData.email.trim() === ""
+    ) {
+      setIsValid(false);
+    } else {
+      setIsValid(true);
+    }
+  }
+
   function enteredHandler(event) {
     event.preventDefault();
     const summitedData = {
@@ -166,29 +177,30 @@ export default function ContactForm() {
         enteredSecondPhoneNumber.current.value +
         enteredThirdPhoneNumber.current.value,
     };
-    enteredType.current.value = "후원";
-    enteredName.current.value = "";
-    enteredFirstPhoneNumber.current.value = "010";
-    enteredSecondPhoneNumber.current.value = "";
-    enteredThirdPhoneNumber.current.value = "";
-
-    enteredFrontEmail.current.value = "";
-
-    setEmailBack("");
-    setEmailForm("");
-    enteredBackEmail.current.value = "";
-    enteredTitle.current.value = "";
-    enteredText.current.value = "";
-
     console.log(summitedData);
+    EnteredTextValid(summitedData);
 
     setIsModal(true);
   }
 
   function modalCloseHandler() {
     setIsModal(false);
-  }
+    if (isValid && agree) {
+      enteredType.current.value = "후원";
+      enteredName.current.value = "";
+      enteredFirstPhoneNumber.current.value = "010";
+      enteredSecondPhoneNumber.current.value = "";
+      enteredThirdPhoneNumber.current.value = "";
 
+      enteredFrontEmail.current.value = "";
+
+      setEmailBack("");
+      setEmailForm("");
+      enteredBackEmail.current.value = "";
+      enteredTitle.current.value = "";
+      enteredText.current.value = "";
+    }
+  }
   return (
     <>
       <FormContainer>
@@ -273,11 +285,15 @@ export default function ContactForm() {
             <textarea ref={enteredText} />
           </TextAreaBox>
           <SubmitButton>
-            <button type='submit'>제출하기!</button>
+            <button type='submit'>등록!!!!</button>
           </SubmitButton>
         </Form>
       </FormContainer>
-      {isModal && <ContactModal onClose={() => modalCloseHandler()} />}
+      {isModal && <ContactModal isValid={isValid && agree} onClose={() => modalCloseHandler()} />}
     </>
   );
 }
+
+ContactForm.propTypes = {
+  agree: PropTypes.bool.isRequired,
+};

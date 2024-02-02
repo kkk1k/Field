@@ -1,7 +1,26 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import theme from "../../theme";
 import H2 from "../../styles/H2";
+
+function Line() {
+  return (
+    <div style={{display: "flex", justifyContent: "center"}}>
+      <div
+        style={{
+          backgroundColor: theme.colors.white,
+          width: "90%",
+          height: "0.05rem",
+          margin: "1rem 0 2rem 0",
+          display: "flex",
+          alignItems: "center",
+          borderRadius: "10%",
+        }}
+      />
+    </div>
+  );
+}
 
 const Content = styled.div`
   display: flex;
@@ -20,9 +39,13 @@ const InputBox = styled.div`
   align-items: center;
   justify-content: center;
   margin: 1rem;
-  input {
-    font-size: 0.75rem;
-  }
+  font-size: 0.75rem;
+`;
+
+const InputText = styled.p`
+  font-size: 0.75rem;
+  color: #ff0202;
+  text-align: center;
 `;
 
 export default function ContactContent(props) {
@@ -64,12 +87,15 @@ export default function ContactContent(props) {
         </p>
         <p>그 외 사항은 개인정보취급방침을 준수합니다.</p>
       </Content>
+      <Line />
+      <InputText> ※ 개인정보 수집이용에 동의하지 않으면 문의가 불가능합니다.</InputText>
       <InputBox>
         <input type='checkbox' checked={isCheckedAgree} onChange={checkAgreeHandler} />
         동의함
         <input type='checkbox' checked={isCheckedDisagree} onChange={checkDisagreeHandler} />
         동의하지 않음
       </InputBox>
+      <Line />
     </>
   );
 }
