@@ -1,19 +1,76 @@
 import React, {useState} from "react";
 import {useNavigate, useLocation} from "react-router-dom";
 
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 import theme from "../theme";
+
+const slideDownAnimation = keyframes`
+  0% {
+    transform-origin: 0 0;
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform-origin: 0 0;
+    transform: translateY(0%);
+  }
+`;
+
+const Middle = styled.span`
+  display: ${({isOpen}) => (isOpen ? "none" : "block")};
+  position: relative;
+  width: 36px;
+  height: 3px;
+  background: ${theme.colors.white};
+  cursor: pointer; // 클릭 가능하도록 커서 설정
+`;
+
+const Top = styled.span`
+  bottom: 8px;
+  display: block;
+  width: 36px;
+  height: 3px;
+  background-color: ${theme.colors.white};
+  position: relative;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transform-origin: left center;
+  transform: ${({isOpen}) => (isOpen ? "rotate(45deg) translate(0px,-4.5px)" : "none")};
+`;
+
+const Bottom = styled.span`
+  top: 8px;
+  display: block;
+  width: 36px;
+  height: 3px;
+  background-color: ${theme.colors.white};
+  position: relative;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transform-origin: left center;
+  transform: ${({isOpen}) => (isOpen ? "rotate(-45deg) translate(0px,4.5px)" : "none")};
+`;
 
 const TopInfo = styled.header`
   display: flex;
+  padding: 0 2.5%;
   align-items: center;
-  justify-content: space-between;
   background-color: black;
   height: 4.5rem;
   position: sticky;
+  justify-content: space-between;
   top: 0;
   z-index: 10;
-  position: stiky;
+  button {
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    outline: none;
+  }
 `;
 
 const HomeLogo = styled.div`
@@ -49,7 +106,8 @@ const HeaderContent = styled.div`
   display: flex;
   flex-direction: column;
   background: ${theme.colors.black};
-  border-top: 1px solid gray;
+
+  animation: ${slideDownAnimation} 0.3s ease-in-out;
   padding: 2rem 0;
   z-index: 2;
   button {
@@ -75,6 +133,8 @@ const HeaderContent = styled.div`
 `;
 
 export default function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+
   const location = useLocation();
 
   const navigate = useNavigate();
@@ -92,21 +152,32 @@ export default function Header() {
   const directionHandler = e => {
     navigate(`/${e.target.name}`);
     setIsActive(false);
+    setIsOpen(false);
+  };
+
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+    setIsActive(!isActive);
   };
 
   return (
-    <TopInfo>
-      <HomeLogo onClick={Homeredirect}>
-        <img src='FieldLogo.png' alt='필드로고' />
-        <p>FIELD</p>
-      </HomeLogo>
-      <button
-        type='button'
-        onClick={MenuHandler}
-        style={{background: "none", border: "none", paddingRight: "1rem"}}
-      >
-        <img src='menu-bar.png' alt='필드로고' width={40} height={40} />
-      </button>
+    <>
+      <TopInfo>
+        <HomeLogo onClick={Homeredirect}>
+          <img src='FieldLogo.png' alt='필드로고' />
+          <p>FIELD</p>
+        </HomeLogo>
+        <button
+          type='button'
+          onClick={handleClick}
+          aria-label={isOpen ? "Close Menu" : "Open Menu"}
+          style={{padding: "12px 0"}}
+        >
+          <Top isOpen={isOpen} />
+          <Middle isOpen={isOpen} />
+          <Bottom isOpen={isOpen} />
+        </button>
+      </TopInfo>
       {isActive && (
         <>
           <HeaderBackground onClick={MenuHandler} />
@@ -129,6 +200,6 @@ export default function Header() {
           </HeaderContent>
         </>
       )}
-    </TopInfo>
+    </>
   );
 }
