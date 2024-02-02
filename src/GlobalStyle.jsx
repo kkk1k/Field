@@ -3,7 +3,7 @@ import theme from "./theme";
 
 const GlobalStyle = createGlobalStyle`
 html{
-    background : ${theme.colors.primary};
+    background: repeating-linear-gradient(#2C3B5F, #091A45, #2C3B5F 150vh);
     color: ${theme.colors.white};
     font-family: 'SUIT-Regular';
 },

@@ -10,10 +10,10 @@ const FlexCenter = styled.div`
   position: ${props => (props.position ? props.position : "")};
   bottom: ${props => (props.bottom ? props.bottom : "0")};
   background-color: ${props => (props.bgColor ? theme.colors[props.bgColor] : "")};
-  padding-top: ${props => (props.pt ? props.pt : "")};
-  padding-bottom: ${props => (props.pb ? props.pb : "")};
-  padding-left: ${props => (props.pl ? props.pl : "")};
-  padding-right: ${props => (props.pr ? props.pr : "")};
+  margin-top: ${props => (props.mt ? props.mt : "")};
+  margin-bottom: ${props => (props.mb ? props.mb : "")};
+  margin-left: ${props => (props.ml ? props.ml : "")};
+  margin-right: ${props => (props.mr ? props.mr : "")};
 `;
 
 export default FlexCenter;

@@ -18,11 +18,12 @@ const FigureBox = styled.article`
 
 const FigCaption = styled.figcaption`
   margin-bottom: 0.5rem;
+  font-size: 1.2rem;
 `;
 
 function ProfileLeft({name, intro, position, src}) {
   return (
-    <FlexBox ml='1.875rem' gap='2rem' mr='1.875rem' mt='2rem'>
+    <FlexBox ml='10%' gap='2rem' mr='10%' mt='2rem' direction='column'>
       <FigureBox>
         <Figure>
           <Image src={src} width='7.5rem' height='9.375rem' radius='50%' mb='0.5rem' />

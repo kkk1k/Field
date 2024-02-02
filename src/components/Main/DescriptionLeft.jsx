@@ -6,8 +6,8 @@ import logo from "../../assets/fieldLogo.png";
 
 function DescriptionLeft() {
   return (
-    <FlexBox mr='1.875rem' mb='3.75rem'>
-      <Image src={logo} width='8.75rem' height='6.25rem' ml='1.875rem' mr='1.875rem' />
+    <FlexBox mr='10%' mb='3.75rem'>
+      <Image src={logo} width='8.75rem' height='6.25rem' ml='10%' mr='10%' />
       <Span>
         {" "}
         Field화이팅 Field화이팅 Field화이팅 Field화이팅 Field화이팅 Field화이팅 Field화이팅

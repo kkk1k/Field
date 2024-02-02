@@ -9,7 +9,7 @@ const TopInfo = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: black;
+  background-color: #000b26;
   height: 10vh;
   position: sticky;
   top: 0;
@@ -41,7 +41,7 @@ const HeaderBackground = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 11, 38, 0.5);
   z-index: -1;
 `;
 
@@ -51,7 +51,7 @@ const HeaderContent = styled.div`
   top: 4.5rem;
   display: flex;
   flex-direction: column;
-  background: ${theme.colors.black};
+  background: #000b26;
   border-top: 1px solid gray;
   padding: 2rem 0;
   z-index: 2;
@@ -59,7 +59,7 @@ const HeaderContent = styled.div`
     appearance: none;
     border: none;
     font-size: 2rem;
-    background: ${theme.colors.black};
+    background: #000b26;
     text-align: left;
     padding: 0.8rem 1rem;
     color: ${theme.colors.gray};
