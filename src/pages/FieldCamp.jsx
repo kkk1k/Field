@@ -12,6 +12,7 @@ import theme from "../theme";
 import campBackgroundImage1 from "../assets/camp1.png";
 import campBackgroundImage2 from "../assets/camp2.png";
 import campBackgroundImage3 from "../assets/camp3.png";
+import Dropdown from "../components/Dropdown";
 
 function FieldCamp() {
   return (
@@ -105,6 +106,7 @@ function FieldCamp() {
         </FlexCenter>
       </BackgroundImage>
       <H2>역대 FieldCamp</H2>
+      <Dropdown label='년도별 캠프' menuItemList={["1월", "2월", "3월"]} />
     </>
   );
 }

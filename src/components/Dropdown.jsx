@@ -1,24 +1,30 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
-import {Pagination, InputLabel, MenuItem, FormControl, Select} from "@mui/material";
+import PropTypes from "prop-types";
+import {InputLabel, MenuItem, FormControl, Select} from "@mui/material";
 
-function Dropdown() {
+function Dropdown({label, menuItemList}) {
+  const [dropDownValue, setDropDownValue] = useState("");
+  const handleValueChange = event => {
+    setDropDownValue(event.target.value);
+  };
+
   return (
     <CustomFormControl variant='outlined' sx={{m: 1, minWidth: 350}}>
-      <CustomInputLabel id='demo-simple-select-helper-label'>월간 필드</CustomInputLabel>
+      <CustomInputLabel id='demo-simple-select-helper-label'>{label}</CustomInputLabel>
       <CustomSelect
         labelId='demo-simple-select-helper-label'
         id='demo-simple-select-helper'
-        onChange={handleMonthChange}
-        value={monthField}
-        label='월간 필드'
+        onChange={handleValueChange}
+        value={dropDownValue}
+        label={label}
         MenuProps={{
           anchorOrigin: {
             vertical: "bottom",
             horizontal: "left",
           },
           transformOrigin: {
-            vertical: "top",
+            vertical: "bottom",
             horizontal: "left",
           },
           style: {
@@ -28,13 +34,25 @@ function Dropdown() {
           getContentAnchorEl: null, // 드롭다운의 위치를 anchorOrigin에 맞게 조정하기 위해 필요할 수 있습니다.
         }}
       >
-        <MenuItem value='1월'>1월</MenuItem>
-        <MenuItem value='2월'>2월</MenuItem>
-        <MenuItem value='3월'>3월</MenuItem>
+        {menuItemList.map(item => (
+          <MenuItem value={item}>{item}</MenuItem>
+        ))}
       </CustomSelect>
     </CustomFormControl>
   );
 }
+// Prop types 선언, 보다 구체적인 타입 사용
+Dropdown.propTypes = {
+  label: PropTypes.string, // 'value' prop의 타입을 string으로 변경 (예시)
+  menuItemList: PropTypes.arrayOf(PropTypes.string), // 'menuItemList'는 문자열의 배열로 변경 (예시)
+};
+
+// defaultProps 선언
+Dropdown.defaultProps = {
+  label: "", // 'value'의 기본값은 빈 문자열로 설정
+  menuItemList: [], // 'menuItemList'의 기본값은 빈 배열로 설정
+  // 'onChange'는 필수 prop이므로 defaultProps가 필요 없습니다.
+};
 
 export default Dropdown;
 
