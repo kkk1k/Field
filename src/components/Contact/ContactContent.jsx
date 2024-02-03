@@ -13,7 +13,7 @@ function Line() {
           width: "80%",
           height: "0.05rem",
           display: "flex",
-          margin: "2rem 0",
+          margin: "0.5rem 0 1rem 0 ",
           alignItems: "center",
           borderRadius: "10%",
         }}
@@ -35,12 +35,15 @@ const Content = styled.div`
 
 const InputBox = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   margin: 1rem;
   font-size: 0.75rem;
+  .last {
+    margin: 0 0 0 4rem;
+  }
   input {
-    margin: "0 1rem";
+    margin: 0 0.2rem 0 0;
   }
 `;
 
@@ -90,7 +93,12 @@ export default function ContactContent(props) {
       <InputBox>
         <input type='checkbox' checked={isCheckedAgree} onChange={checkAgreeHandler} />
         동의함
-        <input type='checkbox' checked={isCheckedDisagree} onChange={checkDisagreeHandler} />
+        <input
+          className='last'
+          type='checkbox'
+          checked={isCheckedDisagree}
+          onChange={checkDisagreeHandler}
+        />
         동의하지 않음
       </InputBox>
       <Line />

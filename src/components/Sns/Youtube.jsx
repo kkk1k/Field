@@ -6,7 +6,8 @@ const youTubeInfo = {
   name: "YouTube",
   image: "YouTubeLogo.png",
   imageAlt: "Youtube Logo",
-  linkTitle: "유튜브 주소",
+  linkTitle: "유튜브",
+  color: "#FF0202",
   link: "https://www.youtube.com/@field2023",
   title: "FIELD 유튜브",
   summary: "FIELD에서 산업공학을 홍보하기 위해 만든 채널입니다.",
@@ -21,7 +22,7 @@ const VideoContainer = styled.section`
   width: 85%;
   height: 30vh;
   overflow: hidden;
-
+  border-radius: 2rem;
   iframe {
     width: 100%;
     height: 100%;
@@ -33,7 +34,7 @@ export default function YouTube() {
     <SnsInfo info={youTubeInfo}>
       <VideoContainer>
         <iframe
-          src='https://www.youtube.com/embed/NBAmC4Cut2c?si=DcjwQFqKQj7Feeo7'
+          src='https://www.youtube.com/embed/whOL5rjVi3E?si=MGLpkgulB1l3hadN'
           title='YouTube video player'
           allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
           allowFullScreen

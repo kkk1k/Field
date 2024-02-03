@@ -28,7 +28,7 @@ const Top = styled.span`
 const Bottom = styled.span`
   top: 0.5rem;
   display: block;
-  width: 2.25rem
+  width: 2.25rem;
   height: 0.1875rem;
   background-color: ${theme.colors.white};
   position: relative;

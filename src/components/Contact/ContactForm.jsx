@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import ContactModal from "./ContactModal";
+import theme from "../../theme";
 
 const Form = styled.form`
   margin: 0 10%;
@@ -13,13 +14,15 @@ const Form = styled.form`
 `;
 
 const Container = styled.section`
+  color: ${theme.colors.white};
   .notice {
     position: relative;
     p {
       position: absolute;
       color: #ff0202;
-      font-size: 2rem;
+      font-size: 1.5rem;
       left: -1rem;
+      top: -0.5rem;
     }
   }
   h4 {
@@ -29,7 +32,7 @@ const Container = styled.section`
     color: gray;
     margin: 0 0 0 1rem;
     width: 5rem;
-    padding: 0.5em 0.5em;
+    padding: 0.2em 0.5em;
     appearance: none;
     background: url("downward-arrow.png") no-repeat 95% 50%;
     background-size: 1.5rem 1.5rem;
@@ -44,6 +47,10 @@ const Container = styled.section`
     border: none;
     padding: 0.2rem 0.5rem;
     box-sizing: border-box;
+    border-radius: 0.5rem;
+    background-color: rgba(83, 83, 83, 0.5);
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.85);
   }
   textarea {
     box-sizing: border-box;
@@ -51,6 +58,8 @@ const Container = styled.section`
     height: 8rem;
     border: none;
     padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: rgba(83, 83, 83, 0.5);
   }
 `;
 
@@ -69,27 +78,31 @@ const PhoneContainer = styled(Container)`
 
   select {
     flex-grow: 1;
-    margin: 0 1rem 0 0;
+    margin: 0 0.5rem 0 0;
+    font-size: 1.5rem;
   }
   input {
     flex-grow: 1;
     width: 5rem;
     margin: 0 0.5rem;
     padding: 0 0.25rem;
+    text-align: center;
   }
   .lastInput {
-    margin-right: 0px;
+    margin-right: 0;
   }
 `;
 
 const EmailContainer = styled(Container)`
   select {
     padding: 0.5em 0 0.5em 0;
-    margin: 0 0 0 0.5rem;
+    margin: 0 0 0 0;
     flex-grow: 1.5;
   }
   input {
     width: 30%;
+    font-size: 1rem;
+    margin: 0 0.2rem 0 0;
   }
   div {
     display: flex;
@@ -97,7 +110,8 @@ const EmailContainer = styled(Container)`
     justify-content: center;
   }
   input:disabled {
-    color: black;
+    background-color: ${theme.colors.primary};
+    color: rgba(255, 255, 255, 0.85);
   }
 `;
 
