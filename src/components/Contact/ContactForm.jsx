@@ -84,11 +84,12 @@ const PhoneContainer = styled(Container)`
 
 const EmailContainer = styled(Container)`
   select {
+    padding: 0.5em 0 0.5em 0;
     margin: 0 0 0 0.5rem;
-    flex-grow: 1;
+    flex-grow: 1.5;
   }
   input {
-    width: 33%;
+    width: 30%;
   }
   div {
     display: flex;
@@ -285,8 +286,7 @@ export default function ContactForm({agree}) {
           ) : null}
           <h4>Email</h4>
           <div>
-            <input type='text' ref={enteredFrontEmail} />
-            <p style={{padding: "0.4rem"}}>@</p>
+            <input type='text' ref={enteredFrontEmail} />@
             {emailForm === "" ? (
               <input
                 type='text'
