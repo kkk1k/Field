@@ -10,10 +10,10 @@ function Line() {
       <div
         style={{
           backgroundColor: theme.colors.white,
-          width: "90%",
+          width: "80%",
           height: "0.05rem",
-          margin: "1rem 0 2rem 0",
           display: "flex",
+          margin: "2rem 0",
           alignItems: "center",
           borderRadius: "10%",
         }}
@@ -29,8 +29,7 @@ const Content = styled.div`
   p {
     text-align: left;
     font-size: 0.75rem;
-    padding: 1rem 2rem;
-    width: 80%;
+    margin: 5% 10%;
   }
 `;
 
@@ -40,6 +39,9 @@ const InputBox = styled.div`
   justify-content: center;
   margin: 1rem;
   font-size: 0.75rem;
+  input {
+    margin: "0 1rem";
+  }
 `;
 
 const InputText = styled.p`
@@ -52,10 +54,6 @@ export default function ContactContent(props) {
   const {onAgree} = props;
   const [isCheckedAgree, setIsCheckedAgree] = useState(false);
   const [isCheckedDisagree, setIsCheckedDisagree] = useState(true);
-
-  ContactContent.propTypes = {
-    onAgree: PropTypes.func.isRequired,
-  };
 
   const checkAgreeHandler = () => {
     setIsCheckedAgree(true);
@@ -99,3 +97,7 @@ export default function ContactContent(props) {
     </>
   );
 }
+
+ContactContent.propTypes = {
+  onAgree: PropTypes.func.isRequired,
+};

@@ -68,23 +68,39 @@ const Modal = styled.div`
 const portalElement = document.getElementById("contact-modal");
 
 export default function ContactModal(props) {
-  const {onClose, isValid} = props;
+  const {onClose, valid, agree} = props;
+
+  console.log(valid);
+  console.log(agree);
+  let content;
+  if (valid && agree) {
+    content = (
+      <>
+        <p>소중한 의견 감사합니다.</p>
+        <p>추후에 메일로 연락드리겠습니다.</p>
+      </>
+    );
+  } else if (valid && !agree) {
+    content = (
+      <>
+        <p>개인정보 수집 이용에 관하여</p>
+        <p>동의하지 않으면 등록이 불가능합니다.</p>
+      </>
+    );
+  } else {
+    content = (
+      <>
+        <p>형식에 맞지 않는 부분이있습니다.</p>
+        <p>체크된 항목을 다시 작성해주세요</p>
+      </>
+    );
+  }
 
   function messageBox() {
     return (
       <ModalBackground>
         <Modal>
-          {isValid ? (
-            <>
-              <p>소중한 의견 감사합니다.</p>
-              <p>추후에 메일로 연락드리겠습니다.</p>
-            </>
-          ) : (
-            <>
-              <p>개인정보 수집 이용에 관하여</p>
-              <p>동의하지 않으면 등록이 불가능합니다.</p>
-            </>
-          )}
+          {content}
           <button type='button' onClick={onClose}>
             확인하기
           </button>
@@ -97,6 +113,7 @@ export default function ContactModal(props) {
 }
 
 ContactModal.propTypes = {
-  isValid: PropTypes.bool.isRequired,
+  agree: PropTypes.bool.isRequired,
+  valid: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
 };
