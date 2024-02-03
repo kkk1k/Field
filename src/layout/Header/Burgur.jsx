@@ -6,17 +6,17 @@ import theme from "../../theme";
 const Middle = styled.span`
   display: ${({open}) => (open ? "none" : "block")};
   position: relative;
-  width: 36px;
-  height: 3px;
+  width: 2.25rem;
+  height: 0.1875rem;
   background: ${theme.colors.white};
-  cursor: pointer; // 클릭 가능하도록 커서 설정
+  cursor: pointer;
 `;
 
 const Top = styled.span`
-  bottom: 8px;
+  bottom: 0.5rem;
   display: block;
-  width: 36px;
-  height: 3px;
+  width: 2.25rem;
+  height: 0.1875rem;
   background-color: ${theme.colors.white};
   position: relative;
   -webkit-transition: -webkit-transform 0.3s;
@@ -26,10 +26,10 @@ const Top = styled.span`
 `;
 
 const Bottom = styled.span`
-  top: 8px;
+  top: 0.5rem;
   display: block;
-  width: 36px;
-  height: 3px;
+  width: 2.25rem
+  height: 0.1875rem;
   background-color: ${theme.colors.white};
   position: relative;
   -webkit-transition: -webkit-transform 0.3s;

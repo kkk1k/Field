@@ -69,9 +69,6 @@ const portalElement = document.getElementById("contact-modal");
 
 export default function ContactModal(props) {
   const {onClose, valid, agree} = props;
-
-  console.log(valid);
-  console.log(agree);
   let content;
   if (valid && agree) {
     content = (
