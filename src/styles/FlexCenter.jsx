@@ -6,6 +6,7 @@ const FlexCenter = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   gap: ${props => (props.gap ? props.gap : "0")};
   position: ${props => (props.position ? props.position : "")};
   bottom: ${props => (props.bottom ? props.bottom : "0")};

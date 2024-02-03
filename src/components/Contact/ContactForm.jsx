@@ -152,17 +152,17 @@ export default function ContactForm() {
 
   function enteredHandler(event) {
     event.preventDefault();
-    const summitedData = {
-      type: enteredType.current.value,
-      name: enteredName.current.value,
-      title: enteredTitle.current.value,
-      text: enteredText.current.value,
-      email: `${enteredFrontEmail.current.value}@${enteredBackEmail.current.value}`,
-      phoneNumber:
-        enteredFirstPhoneNumber.current.value +
-        enteredSecondPhoneNumber.current.value +
-        enteredThirdPhoneNumber.current.value,
-    };
+    // const summitedData = {
+    //   type: enteredType.current.value,
+    //   name: enteredName.current.value,
+    //   title: enteredTitle.current.value,
+    //   text: enteredText.current.value,
+    //   email: `${enteredFrontEmail.current.value}@${enteredBackEmail.current.value}`,
+    //   phoneNumber:
+    //     enteredFirstPhoneNumber.current.value +
+    //     enteredSecondPhoneNumber.current.value +
+    //     enteredThirdPhoneNumber.current.value,
+    // };
     enteredType.current.value = "후원";
     enteredName.current.value = "";
     enteredFirstPhoneNumber.current.value = "010";

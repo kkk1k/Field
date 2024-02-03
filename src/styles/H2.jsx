@@ -6,6 +6,7 @@ const H2 = styled.h2`
   color: ${props => (props.color ? theme.colors[props.color] : theme.colors.white)};
   margin: ${props => (props.margin ? props.margin : "2rem 0 2rem 0")};
   text-align: center;
+  font-weight: bold;
 };
 `;
 
