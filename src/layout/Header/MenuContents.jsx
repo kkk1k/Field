@@ -32,16 +32,16 @@ const HeaderContent = styled.div`
   top: 4.5rem;
   display: flex;
   flex-direction: column;
-  background: ${theme.colors.black};
+  background: #000b26;
 
   animation: ${slideDownAnimation} 0.3s ease-in-out;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   z-index: 10;
   button {
     appearance: none;
     border: none;
     font-size: 2rem;
-    background: ${theme.colors.black};
+    background: #000b26;
     text-align: left;
     padding: 0.8rem 1rem;
     color: ${theme.colors.gray};

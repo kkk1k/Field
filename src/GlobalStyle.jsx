@@ -6,6 +6,7 @@ html{
     background : ${theme.colors.primary};
     color: ${theme.colors.white};
     font-family: 'SUIT-Regular';
+
 },
 body,
 div,

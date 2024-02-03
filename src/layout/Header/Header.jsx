@@ -8,7 +8,7 @@ const TopInfo = styled.header`
   display: flex;
   padding: 0 2.5%;
   align-items: center;
-  background-color: black;
+  background-color: #000b26;
   height: 4.5rem;
   position: sticky;
   justify-content: space-between;
