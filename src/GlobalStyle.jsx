@@ -4,7 +4,8 @@ import theme from "./theme";
 const GlobalStyle = createGlobalStyle`
 html{
     background : ${theme.colors.primary};
-    color: ${theme.colors.white}
+    color: ${theme.colors.white};
+    font-family: 'SUIT-Regular';
 },
 body,
 div,

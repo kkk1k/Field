@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useNavigate, useLocation} from "react-router-dom";
-
 import styled, {keyframes} from "styled-components";
+
 import theme from "../theme";
 
 const slideDownAnimation = keyframes`
@@ -56,7 +56,7 @@ const TopInfo = styled.header`
   padding: 0 2.5%;
   align-items: center;
   background-color: black;
-  height: 4.5rem;
+  height: 10vh;
   position: sticky;
   justify-content: space-between;
   top: 0;
@@ -80,8 +80,10 @@ const HomeLogo = styled.div`
   }
   display: flex;
   align-items: center;
+  justify-content: center;
   img {
     height: 2.25rem;
+    width: 2.25rem;
   }
   p {
     margin-left: 0.5rem;

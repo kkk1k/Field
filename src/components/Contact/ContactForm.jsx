@@ -117,10 +117,8 @@ const SubmitButton = styled.div`
     cursor: pointer;
   }
 `;
-
 export default function ContactForm({agree}) {
   const patternPhone = /[0-9]{3}-[0-9]{4,}/;
-
   const [emailForm, setEmailForm] = useState("");
   const [emailBack, setEmailBack] = useState("");
   const [isModal, setIsModal] = useState(false);

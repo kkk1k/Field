@@ -18,14 +18,12 @@ const VideoContainer = styled.section`
   display: flex;
   position: relative;
   justify-content: center;
-  width: 100vw;
+  width: 85%;
   height: 30vh;
-  border-radius: 5rem;
   overflow: hidden;
 
   iframe {
-    z-index: 0;
-    width: 85%;
+    width: 100%;
     height: 100%;
   }
 `;
