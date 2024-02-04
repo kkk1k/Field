@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import ContactModal from "./ContactModal";
 import theme from "../../theme";
+import Message from "../../lib/contactApi";
 
 const Form = styled.form`
   margin: 0 10%;
@@ -133,9 +134,12 @@ const SubmitButton = styled.div`
 `;
 export default function ContactForm({agree}) {
   const patternPhone = /[0-9]{3}-[0-9]{4,}/;
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const [emailForm, setEmailForm] = useState("");
   const [emailBack, setEmailBack] = useState("");
   const [isModal, setIsModal] = useState(false);
+  const [summitedData, setSummitedData] = useState({});
+  const [agreeAdd, setAgreeAdd] = useState();
 
   const [isNameValid, setIsNameValid] = useState(undefined);
   const [isPhoneValid, setIsPhoneValid] = useState(undefined);
@@ -160,7 +164,10 @@ export default function ContactForm({agree}) {
     } else {
       setIsValid(false);
     }
-  }, [isContentValid, isEmailValid, isNameValid, isPhoneValid, isTitleValid]);
+    if (summitedData && isValid && agreeAdd) {
+      Message(summitedData);
+    }
+  }, [isContentValid, isEmailValid, isNameValid, isPhoneValid, isTitleValid, agreeAdd]);
 
   function emailBackHandler(event) {
     setEmailBack(event.target.value);
@@ -196,33 +203,32 @@ export default function ContactForm({agree}) {
       setIsPhoneValid(true);
     }
     if (
-      enteredFrontEmail.current.value.trim() === "" ||
-      enteredBackEmail.current.value.trim() === ""
+      !emailPattern.test(`${enteredFrontEmail.current.value}@${enteredBackEmail.current.value}`)
     ) {
       setIsEmailValid(false);
     } else {
       setIsEmailValid(true);
     }
   }
-
   function enteredHandler(event) {
     event.preventDefault();
-    const summitedData = {
+    setSummitedData(prev => ({
+      ...prev,
       type: enteredType.current.value,
       name: enteredName.current.value,
       title: enteredTitle.current.value,
       text: enteredText.current.value,
       email: `${enteredFrontEmail.current.value}@${enteredBackEmail.current.value}`,
       phoneNumber: `${enteredFirstPhoneNumber.current.value}-${enteredSecondPhoneNumber.current.value}-${enteredThirdPhoneNumber.current.value}`,
-    };
+    }));
+    setAgreeAdd(agree);
     EnteredTextValid();
     setIsModal(true);
   }
 
   function modalCloseHandler() {
     setIsModal(false);
-
-    if (isValid && agree) {
+    if (summitedData && isValid && agreeAdd) {
       window.location.reload();
     }
   }

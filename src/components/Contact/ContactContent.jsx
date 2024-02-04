@@ -105,7 +105,6 @@ export default function ContactContent(props) {
     </>
   );
 }
-
 ContactContent.propTypes = {
   onAgree: PropTypes.func.isRequired,
 };
