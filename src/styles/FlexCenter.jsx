@@ -4,7 +4,7 @@ import theme from "../theme";
 const FlexCenter = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: ${props => (props.justify ? props.justify : "center")};
   align-items: center;
   gap: ${props => (props.gap ? props.gap : "0")};
   position: ${props => (props.position ? props.position : "")};
@@ -14,6 +14,7 @@ const FlexCenter = styled.div`
   margin-bottom: ${props => (props.mb ? props.mb : "")};
   margin-left: ${props => (props.ml ? props.ml : "")};
   margin-right: ${props => (props.mr ? props.mr : "")};
+  font-size: ${props => (props.size ? props.size : "")};
 `;
 
 export default FlexCenter;

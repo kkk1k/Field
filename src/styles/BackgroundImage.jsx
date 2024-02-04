@@ -7,13 +7,14 @@ const BackgroundImage = styled.section`
   position: ${props => (props.position ? props.position : "")};
   background-image: ${props => (props.src ? `url(${props.src})` : "")};
   background-position: center;
-  object-fit: cover;
   padding-top: ${props => (props.pt ? props.pt : "")};
   padding-bottom: ${props => (props.pb ? props.pb : "")};
   padding-left: ${props => (props.pl ? props.pl : "")};
   padding-right: ${props => (props.pr ? props.pr : "")};
-  background-size: cover;
+  background-size: ${props => (props.size ? props.size : "cover")};
+  background-repeat: no-repeat;
   opacity: ${props => (props.opacity ? props.opacity : "")};
+  color: ${props => (props.color ? props.color : "white")};
   justify-content: center;
   align-items: center;
 `;

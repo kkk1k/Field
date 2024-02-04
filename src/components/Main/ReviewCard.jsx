@@ -7,25 +7,29 @@ import H3 from "../../styles/H3";
 const Card = styled.div`
   display: flex;
   flex-direction: column;
-  text-align: center;
-  margin-right: 10%;
-  margin-left: 10%;
+  margin: auto
+  width: 80%;
   background: #ffbc13;
-  align-items: center;
   padding: 1rem;
+  border-radius: 10px;
 `;
 
 function ReviewCard({question, answer, school, name}) {
   return (
     <Card>
-      <H3 color='black' mb='0.5rem'>
+      <H3 color='black' mb='1rem'>
         {question}
       </H3>
-      <Span color='black' mb='0.3rem'>
+      <Span color='black' mb='0.5rem'>
         {answer}
       </Span>
-      <Span color='black'>{school}</Span>
-      <Span color='black'>{name}</Span>
+
+      <Span color='black' align='center'>
+        {school}
+      </Span>
+      <Span color='black' align='center'>
+        {name}
+      </Span>
     </Card>
   );
 }

@@ -6,7 +6,7 @@ const H3 = styled.h3`
   color: ${props => (props.color ? theme.colors[props.color] : theme.colors.white)};
   margin-top: ${props => (props.mt ? props.mt : "0rem")};
   margin-bottom: ${props => (props.mb ? props.mb : "0rem")};
-  text-align: center;
+  text-align: ${props => (props.align ? props.align : "center")};
 };
 `;
 
