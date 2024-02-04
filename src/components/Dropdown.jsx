@@ -28,8 +28,8 @@ function Dropdown({label, menuItemList}) {
             horizontal: "left",
           },
           style: {
-            left: "-8px", // 드롭다운의 왼쪽 위치를 조정
-            top: "20px", // 드롭다운의 상단 위치를 조정 (필요한 경우)
+            left: "0.5rem", // 드롭다운의 왼쪽 위치를 조정
+            top: "1.25rem", // 드롭다운의 상단 위치를 조정 (필요한 경우)
           },
           getContentAnchorEl: null, // 드롭다운의 위치를 anchorOrigin에 맞게 조정하기 위해 필요할 수 있습니다.
         }}
@@ -81,7 +81,7 @@ const CustomSelect = styled(Select)`
   .MuiSelect-select {
     // Material UI 내부 클래스에 스타일 적용
     color: white;
-    padding-left: 20px;
+    padding-left: 1.25rem;
   }
   .MuiSelect-icon {
     // 드롭다운 아이콘 스타일 변경

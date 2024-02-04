@@ -3,7 +3,6 @@ import YouTube from "../components/Sns/Youtube";
 import KakaoTalk from "../components/Sns/KakaoTalk";
 import Instagram from "../components/Sns/Instagram";
 import H2 from "../styles/H2";
-import FiledIcon from "../components/Sns/FieldIcon";
 import theme from "../theme";
 
 function Line() {
@@ -27,8 +26,7 @@ function Line() {
 export default function Sns() {
   return (
     <>
-      <FiledIcon />
-      <H2 padding='0 0 0 0'>SNS</H2>
+      <H2>SNS</H2>
       <YouTube />
       <Line />
       <Instagram />

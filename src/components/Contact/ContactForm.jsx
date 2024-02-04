@@ -1,36 +1,39 @@
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import ContactModal from "./ContactModal";
-
-const FormContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-`;
-
-const Title = styled.p`
-  margin: 0.5rem 0 0.2rem 0;
-`;
+import theme from "../../theme";
+import Message from "../../lib/contactApi";
 
 const Form = styled.form`
-  width: 80%;
+  margin: 0 10%;
   display: flex;
   flex-direction: column;
   section {
     padding: 0 0 1rem 0;
-    justify-content: left;
   }
 `;
 
-const Type = styled.section`
-  display: flex;
-  align-items: center;
+const Container = styled.section`
+  color: ${theme.colors.white};
+  .notice {
+    position: relative;
+    p {
+      position: absolute;
+      color: #ff0202;
+      font-size: 1.5rem;
+      left: -1rem;
+      top: -0.5rem;
+    }
+  }
+  h4 {
+    margin: 0 0 0.5rem 0;
+  }
   select {
     color: gray;
-    margin: 0 0 0 0.8rem;
-    -webkit-appearance: none;
+    margin: 0 0 0 1rem;
     width: 5rem;
-    padding: 0.5em 0.5em;
+    padding: 0.2em 0.5em;
     appearance: none;
     background: url("downward-arrow.png") no-repeat 95% 50%;
     background-size: 1.5rem 1.5rem;
@@ -39,73 +42,77 @@ const Type = styled.section`
     font-size: 1rem;
   }
   input {
-  }
-`;
-
-const PhoneContanier = styled.section`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-
-  select {
-    flex-grow: 1;
-    color: gray;
-    margin: 0 1rem 0 0;
-    -webkit-appearance: none;
-    padding: 0.5em 0.5em;
-    appearance: none;
-    background: url("downward-arrow.png") no-repeat 95% 50%;
-    background-size: 20px 20px;
-    border: none;
-    border-bottom: 2px solid gray;
-    font-size: 0.9rem;
-  }
-  input {
-    flex-grow: 1;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 5rem;
-    border: none;
-    height: 2rem;
-    margin: 0 0.5rem;
-    padding: 0 0.25rem;
-  }
-  .lastInput {
-    margin-right: 0px;
-  }
-`;
-
-const EmailContanier = styled(PhoneContanier)`
-  select {
-    margin: 0 0 0 0.5rem;
-  }
-  input:disabled {
-    color: black;
-  }
-  input {
-    margin: 0;
-  }
-`;
-
-const TextBox = styled.section`
-  input {
     padding: 0;
     width: 100%;
     height: 2rem;
     border: none;
     padding: 0.2rem 0.5rem;
     box-sizing: border-box;
+    border-radius: 0.5rem;
+    background-color: rgba(83, 83, 83, 0.5);
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.85);
   }
-`;
-
-const TextAreaBox = styled.section`
   textarea {
     box-sizing: border-box;
     width: 100%;
     height: 8rem;
     border: none;
     padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: rgba(83, 83, 83, 0.5);
+  }
+`;
+
+const TypeContainer = styled(Container)`
+  display: flex;
+  align-items: center;
+`;
+
+const PhoneContainer = styled(Container)`
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  select {
+    flex-grow: 1;
+    margin: 0 0.5rem 0 0;
+    font-size: 1.5rem;
+  }
+  input {
+    flex-grow: 1;
+    width: 5rem;
+    margin: 0 0.5rem;
+    padding: 0 0.25rem;
+    text-align: center;
+  }
+  .lastInput {
+    margin-right: 0;
+  }
+`;
+
+const EmailContainer = styled(Container)`
+  select {
+    padding: 0.5em 0 0.5em 0;
+    margin: 0 0 0 0;
+    flex-grow: 1.5;
+  }
+  input {
+    width: 30%;
+    font-size: 1rem;
+    margin: 0 0.2rem 0 0;
+  }
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  input:disabled {
+    background-color: ${theme.colors.primary};
+    color: rgba(255, 255, 255, 0.85);
   }
 `;
 
@@ -118,29 +125,49 @@ const SubmitButton = styled.div`
     appearance: none;
     border: none;
     width: 20%;
-    height: 3rem;
+    height: 2rem;
     background-color: gray;
   }
   button:hover {
     cursor: pointer;
   }
 `;
-
-export default function ContactForm() {
+export default function ContactForm({agree}) {
+  const patternPhone = /[0-9]{3}-[0-9]{4,}/;
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const [emailForm, setEmailForm] = useState("");
   const [emailBack, setEmailBack] = useState("");
   const [isModal, setIsModal] = useState(false);
+  const [summitedData, setSummitedData] = useState({});
+  const [agreeAdd, setAgreeAdd] = useState();
+
+  const [isNameValid, setIsNameValid] = useState(undefined);
+  const [isPhoneValid, setIsPhoneValid] = useState(undefined);
+  const [isEmailValid, setIsEmailValid] = useState(undefined);
+  const [isTitleValid, setIsTitleValid] = useState(undefined);
+  const [isContentValid, setIsContentValid] = useState(undefined);
+  const [isValid, setIsValid] = useState(false);
 
   const enteredType = useRef();
   const enteredName = useRef();
   const enteredFrontEmail = useRef();
   const enteredBackEmail = useRef();
-
   const enteredFirstPhoneNumber = useRef();
   const enteredSecondPhoneNumber = useRef();
   const enteredThirdPhoneNumber = useRef();
   const enteredText = useRef();
   const enteredTitle = useRef();
+
+  useEffect(() => {
+    if (isNameValid && isPhoneValid && isEmailValid && isTitleValid && isContentValid) {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+    if (summitedData && isValid && agreeAdd) {
+      Message(summitedData);
+    }
+  }, [isContentValid, isEmailValid, isNameValid, isPhoneValid, isTitleValid, agreeAdd]);
 
   function emailBackHandler(event) {
     setEmailBack(event.target.value);
@@ -150,60 +177,93 @@ export default function ContactForm() {
     setEmailForm(event.target.value === "직접입력" ? "" : event.target.value);
   }
 
+  function EnteredTextValid() {
+    if (enteredName.current.value.trim() === "") {
+      setIsNameValid(false);
+    } else {
+      setIsNameValid(true);
+    }
+    if (enteredTitle.current.value.trim() === "") {
+      setIsTitleValid(false);
+    } else {
+      setIsTitleValid(true);
+    }
+    if (enteredText.current.value.trim() === "") {
+      setIsContentValid(false);
+    } else {
+      setIsContentValid(true);
+    }
+    if (
+      !patternPhone.test(
+        `${enteredSecondPhoneNumber.current.value}-${enteredThirdPhoneNumber.current.value}`,
+      )
+    ) {
+      setIsPhoneValid(false);
+    } else {
+      setIsPhoneValid(true);
+    }
+    if (
+      !emailPattern.test(`${enteredFrontEmail.current.value}@${enteredBackEmail.current.value}`)
+    ) {
+      setIsEmailValid(false);
+    } else {
+      setIsEmailValid(true);
+    }
+  }
   function enteredHandler(event) {
     event.preventDefault();
-    // const summitedData = {
-    //   type: enteredType.current.value,
-    //   name: enteredName.current.value,
-    //   title: enteredTitle.current.value,
-    //   text: enteredText.current.value,
-    //   email: `${enteredFrontEmail.current.value}@${enteredBackEmail.current.value}`,
-    //   phoneNumber:
-    //     enteredFirstPhoneNumber.current.value +
-    //     enteredSecondPhoneNumber.current.value +
-    //     enteredThirdPhoneNumber.current.value,
-    // };
-    enteredType.current.value = "후원";
-    enteredName.current.value = "";
-    enteredFirstPhoneNumber.current.value = "010";
-    enteredSecondPhoneNumber.current.value = "";
-    enteredThirdPhoneNumber.current.value = "";
-
-    enteredFrontEmail.current.value = "";
-
-    setEmailBack("");
-    setEmailForm("");
-    enteredBackEmail.current.value = "";
-    enteredTitle.current.value = "";
-    enteredText.current.value = "";
-
+    setSummitedData(prev => ({
+      ...prev,
+      type: enteredType.current.value,
+      name: enteredName.current.value,
+      title: enteredTitle.current.value,
+      text: enteredText.current.value,
+      email: `${enteredFrontEmail.current.value}@${enteredBackEmail.current.value}`,
+      phoneNumber: `${enteredFirstPhoneNumber.current.value}-${enteredSecondPhoneNumber.current.value}-${enteredThirdPhoneNumber.current.value}`,
+    }));
+    setAgreeAdd(agree);
+    EnteredTextValid();
     setIsModal(true);
   }
 
   function modalCloseHandler() {
     setIsModal(false);
+    if (summitedData && isValid && agreeAdd) {
+      window.location.reload();
+    }
   }
-
   return (
     <>
-      <FormContainer>
-        <Form onSubmit={event => enteredHandler(event)}>
-          <Type>
-            <h4>문의 유형</h4>
-            <select id='firstPhoneNumber' name='firstPhoneNumber' ref={enteredType}>
-              <option value='후원'>후원</option>
-              <option value='문의'>문의</option>
-              <option value='기타'>기타</option>
-            </select>
-          </Type>
+      <Form onSubmit={event => enteredHandler(event)}>
+        <TypeContainer>
+          <h4>문의 유형</h4>
 
-          <Title>이름 (회사)</Title>
-          <TextBox>
-            <input type='text' ref={enteredName} />
-          </TextBox>
+          <select id='firstPhoneNumber' name='firstPhoneNumber' ref={enteredType}>
+            <option value='후원'>후원</option>
+            <option value='문의'>문의</option>
+            <option value='기타'>기타</option>
+          </select>
+        </TypeContainer>
 
-          <Title>연락처</Title>
-          <PhoneContanier>
+        <Container>
+          {isNameValid === false ? (
+            <span className='notice'>
+              <p>*</p>
+            </span>
+          ) : null}
+          <h4>이름 (회사)</h4>
+          <input type='text' ref={enteredName} />
+        </Container>
+
+        <PhoneContainer>
+          {isPhoneValid === false ? (
+            <span className='notice'>
+              <p>*</p>
+            </span>
+          ) : null}
+          <h4>연락처</h4>
+
+          <div>
             <select id='firstPhoneNumber' name='firstPhoneNumber' ref={enteredFirstPhoneNumber}>
               <option value='010'>010</option>
               <option value='02'>02</option>
@@ -225,14 +285,26 @@ export default function ContactForm() {
               <option value='070'>03</option>
             </select>
             -
-            <input type='text' ref={enteredSecondPhoneNumber} />-
-            <input type='text' ref={enteredThirdPhoneNumber} className='lastInput' />
-          </PhoneContanier>
+            <input type='text' maxLength='4' pattern='\d*' ref={enteredSecondPhoneNumber} />-
+            <input
+              type='text'
+              maxLength='4'
+              pattern='\d*'
+              ref={enteredThirdPhoneNumber}
+              className='lastInput'
+            />
+          </div>
+        </PhoneContainer>
 
-          <Title>E-mail</Title>
-          <EmailContanier>
-            <input type='text' ref={enteredFrontEmail} />
-            <p style={{padding: "0.4rem"}}>@</p>
+        <EmailContainer>
+          {isEmailValid === false ? (
+            <span className='notice'>
+              <p>*</p>
+            </span>
+          ) : null}
+          <h4>Email</h4>
+          <div>
+            <input type='text' ref={enteredFrontEmail} />@
             {emailForm === "" ? (
               <input
                 type='text'
@@ -256,23 +328,40 @@ export default function ContactForm() {
               <option value='nate.com'>nate.com</option>
               <option value='yahoo.co.kr'>yahoo.co.kr</option>
             </select>
-          </EmailContanier>
+          </div>
+        </EmailContainer>
 
-          <Title> 제목 </Title>
-          <TextBox>
-            <input type='text' ref={enteredTitle} />
-          </TextBox>
+        <Container>
+          {isTitleValid === false ? (
+            <span className='notice'>
+              <p>*</p>
+            </span>
+          ) : null}
+          <h4> 제목 </h4>
+          <input type='text' ref={enteredTitle} />
+        </Container>
 
-          <Title> 내용 </Title>
-          <TextAreaBox>
-            <textarea ref={enteredText} />
-          </TextAreaBox>
-          <SubmitButton>
-            <button type='submit'>제출하기!</button>
-          </SubmitButton>
-        </Form>
-      </FormContainer>
-      {isModal && <ContactModal onClose={() => modalCloseHandler()} />}
+        <Container>
+          {isContentValid === false ? (
+            <span className='notice'>
+              <p>*</p>
+            </span>
+          ) : null}
+          <h4> 내용 </h4>
+          <textarea ref={enteredText} />
+        </Container>
+
+        <SubmitButton>
+          <button type='submit'>등록!!!!</button>
+        </SubmitButton>
+      </Form>
+      {isModal && (
+        <ContactModal valid={isValid} agree={agree} onClose={() => modalCloseHandler()} />
+      )}
     </>
   );
 }
+
+ContactForm.propTypes = {
+  agree: PropTypes.bool.isRequired,
+};

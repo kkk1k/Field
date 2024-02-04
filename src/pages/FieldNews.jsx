@@ -85,9 +85,9 @@ const Input = styled.input`
   color: white;
   opacity: 1;
   padding: 10px;
-  ::placeholder {
+  &::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: red;
+    color: white;
     opacity: 1; /* Firefox */
   }
 `;

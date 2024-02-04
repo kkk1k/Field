@@ -1,7 +1,22 @@
 import React from "react";
 import {createPortal} from "react-dom";
-import styled from "styled-components";
+import PropTypes from "prop-types";
+import styled, {keyframes} from "styled-components";
 import theme from "../../theme";
+
+const slideDownAnimation = keyframes`
+  0% {
+    transform: translateY(-100%);
+  }
+
+  75%{
+    transform: translateY(10%);
+  }
+
+  100% {
+    transform: translateY(0%);
+  }
+`;
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -21,25 +36,24 @@ const Modal = styled.div`
   justify-content: center;
   flex-direction: column;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #535353;
-  height: 20%;
-  width: 50%;
+  background-color: ${theme.colors.black};
+  height: 25%;
+  width: 60%;
+  border-radius: 2rem;
+  animation: ${slideDownAnimation} 0.5s ease-in-out;
 
   p {
-    padding: 1.5rem;
-    font-size: 1.5rem;
+    padding: 0.5rem;
+    font-size: 0.75rem;
     color: ${theme.colors.white};
   }
 
   button {
     appearance: none;
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: ${theme.colors.white};
-    margin: 1rem;
-    background: ${theme.colors.black};
+    margin: 2rem 0 0 0;
+    background: ${theme.colors.gray};
     border: none;
     padding: 0.4rem 0.5rem;
     border-radius: 0.5rem;
@@ -54,15 +68,38 @@ const Modal = styled.div`
 const portalElement = document.getElementById("contact-modal");
 
 export default function ContactModal(props) {
-  const {onClose} = props;
+  const {onClose, valid, agree} = props;
+  let content;
+  if (valid && agree) {
+    content = (
+      <>
+        <p>소중한 의견 감사합니다.</p>
+        <p>추후에 메일로 연락드리겠습니다.</p>
+      </>
+    );
+  } else if (valid && !agree) {
+    content = (
+      <>
+        <p>개인정보 수집 이용에 관하여</p>
+        <p>동의하지 않으면 등록이 불가능합니다.</p>
+      </>
+    );
+  } else {
+    content = (
+      <>
+        <p>형식에 맞지 않는 부분이있습니다.</p>
+        <p>체크된 항목을 다시 작성해주세요</p>
+      </>
+    );
+  }
 
   function messageBox() {
     return (
       <ModalBackground>
         <Modal>
-          <p>등록되었습니다.</p>
+          {content}
           <button type='button' onClick={onClose}>
-            확인
+            확인하기
           </button>
         </Modal>
       </ModalBackground>
@@ -71,3 +108,9 @@ export default function ContactModal(props) {
 
   return createPortal(messageBox(), portalElement);
 }
+
+ContactModal.propTypes = {
+  agree: PropTypes.bool.isRequired,
+  valid: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
