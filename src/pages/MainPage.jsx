@@ -39,7 +39,7 @@ function MainPage() {
           <H2 margin='0rem 0rem 0rem 0rem'>더 넓은 FIELD로</H2>
         </FlexCenter>
 
-        <FlexCenter bottom='1rem' position='absolute'>
+        <FlexCenter bottom='1rem' position='absolute' left='50%' transform='translate(-50%)'>
           <Span color='white'>아래로 스크롤하세요.</Span>
           <Image
             src={scrollDown}
@@ -105,12 +105,12 @@ function MainPage() {
         전국의 수많은 산업공학도들의 인적, 학술적 교류의 장을 위해 뻗어나가는 필드를 기획하도록 노력하겠습니다! 감사합니다~!'
       />
 
-      <FlexBox ml='10%' mr='10%' mt='2rem'>
+      <FlexBox ml='10%' mr='10%' mt='2rem' justify='space-between'>
         <Profile position='16기 기획부장' name='김민주' src={profile1} />
         <Profile position='16기 대외협력부장' name='강영모' src={profile1} />
       </FlexBox>
 
-      <FlexBox ml='10%' mr='10%' mt='2rem'>
+      <FlexBox ml='10%' mr='10%' mt='2rem' justify='space-between'>
         <Profile position='16기 컴페티션부장' name='이정준' src={profile1} />
         <Profile position='16기 홍보부장' name='정나리' src={profile1} />
       </FlexBox>

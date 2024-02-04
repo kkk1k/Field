@@ -6,12 +6,12 @@ import Card from "./Card";
 const Button = styled.button`
   background-color: black;
   color: white;
-  padding: 10px;
-  margin: 5px;
+  padding: 0.625rem;
+  margin: 0.3125rem;
   cursor: pointer;
   width: 8.75rem;
   height: 3.125rem;
-  border-radius: 30px;
+  border-radius: 1.875rem;
   border: none;
   font-size: 1.25rem;
 
@@ -36,8 +36,7 @@ const CardContainer = styled.div`
   display: ${props => (props.visible ? "block" : "none")};
   width: 100%;
   background-color: black;
-  opacity: 0.6;
-  border-radius: 30px;
+  border-radius: 1.875rem;
   border: 1px solid white;
   margin-top: 1.875rem;
 `;
@@ -77,6 +76,9 @@ function DepartmentIntro() {
           name='기획부'
           description='FIELD 인적, 학술적 교류를 활성화하기 위한 컨텐츠를 기획하고 진행, 총괄하는 부서'
           hashTag={planningHashTag}
+          keyWord1='대인관계능력'
+          keyWord2='리더십'
+          keyWord3='창의력'
         />
       </CardContainer>
       <CardContainer visible={selectedCard === "대외협력부"}>
@@ -84,6 +86,9 @@ function DepartmentIntro() {
           name='대외협력부'
           description='FIELD 내부와 외부의 교류를 담당하며 전반적인 활동에 필요한 인적, 물적 자원관리를 하는 부서 '
           hashTag={externalCooperationHashTag}
+          keyWord1='말하기능력'
+          keyWord2='소통능력'
+          keyWord3='친화력'
         />
       </CardContainer>
       <CardContainer visible={selectedCard === "컴페티션부"}>
@@ -91,6 +96,9 @@ function DepartmentIntro() {
           name='컴페티션부'
           description='FIELD 내 진행하는 학술교류에 관한 업무와 FIELD CAMP 컴페티션에 대한 자료와 평가 기준을 만드는 부서'
           hashTag={competitionHashTag}
+          keyWord1='봉사심'
+          keyWord2='열정'
+          keyWord3='자기주장력'
         />
       </CardContainer>
       <CardContainer visible={selectedCard === "홍보부"}>
@@ -98,6 +106,9 @@ function DepartmentIntro() {
           name='홍보부'
           description='FIELD와 산업공학을 알리는 전반적인 홍보물을 기획하고 제작하는 부서'
           hashTag={promotionHashTag}
+          keyWord1='열정'
+          keyWord2='창의성'
+          keyWord3='팀워크'
         />
       </CardContainer>
     </Container>
