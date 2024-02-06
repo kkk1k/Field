@@ -14,6 +14,7 @@ import campBackgroundImage2 from "../assets/camp2.png";
 import campBackgroundImage3 from "../assets/camp3.png";
 import campTimeline from "../assets/campTimeline.png";
 import Dropdown from "../components/Dropdown";
+import CardCamp from "../components/Camp/CardCamp";
 
 function FieldCamp() {
   return (
@@ -21,7 +22,8 @@ function FieldCamp() {
       <BackgroundImage position='relative' src={campBackgroundImage} opacity='0.9' height='90vh'>
         <FlexCenter>
           <H2>Field Camp</H2>
-          <H3>팀원과 함께 여러분의 열정을 보여주세요!!!!!</H3>
+          <H3 margin='0 0 2rem 0'>팀원과 함께 여러분의</H3>
+          <H3 margin='0 0 0 0'> 열정을 보여주세요!!!!!</H3>
         </FlexCenter>
 
         <FlexCenter bottom='1rem' position='absolute'>
@@ -64,29 +66,43 @@ function FieldCamp() {
       </Container>
       <BackgroundImage position='relative' height='80vh' src={campBackgroundImage1}>
         <FlexCenter pl='10%' pr='10%'>
-          <H2>진행방식</H2>
-          <H3>ON/OFF blended</H3>
-          <Span>본 캠프 2박 3일을 포함하여 사전 데모데이를 통해 팀원들과 친해지세요.</Span>
+          <H3 margin='0 0 2rem 0'>ON/OFF blended</H3>
+          <Span margin='0 0 1rem 0' size='1.25rem'>
+            본 캠프 2박 3일을 포함하여
+          </Span>
+          <Span margin='0 0 1rem 0' size='1.25rem'>
+            사전 데모데이를 통해{" "}
+          </Span>
+          <Span margin='0 0 1rem 0' size='1.25rem'>
+            {" "}
+            팀원들과 친해지세요.
+          </Span>
         </FlexCenter>
       </BackgroundImage>
       <BackgroundImage position='relative' height='80vh' src={campBackgroundImage2}>
         <FlexCenter pl='10%' pr='10%'>
-          <H3>Various program</H3>
-          <Span>다양한 인적 교류 활성화 프로그램을 진행합니다.</Span>
+          <H3 margin='0 0 2rem 0'>Various program</H3>
+          <Span margin='0 0 1rem 0' size='1.25rem'>
+            다양한 인적 교류 활성화
+          </Span>
+          <Span margin='0 0 1rem 0' size='1.25rem'>
+            프로그램을 진행합니다.
+          </Span>
         </FlexCenter>
       </BackgroundImage>
       <BackgroundImage position='relative' height='80vh' src={campBackgroundImage3}>
         <FlexCenter pl='10%' pr='10%'>
-          <H3>Connection with Professor</H3>
-          <Span>산업공학과 출신 기업인, 교수님과 소통하세요.</Span>
+          <H3 margin='0 0 2rem 0'>Connection with Professor</H3>
+          <Span margin='0 0 1rem 0' size='1.25rem'>
+            산업공학과 출신 기업인
+          </Span>
+          <Span margin='0 0 1rem 0' size='1.25rem'>
+            교수님과 소통하세요.
+          </Span>
         </FlexCenter>
       </BackgroundImage>
       <Container>
-        <H2>역대 FieldCamp</H2>
-        <Dropdown label='년도별 캠프' menuItemList={["1월", "2월", "3월"]} />
-        {/* <Image>asd</Image>
-        <Image>asd</Image> */}
-        <H2 color='yellow'>Time Line</H2>
+        <CardCamp />
         <Image width='12rem' src={campTimeline} />
       </Container>
     </>
@@ -129,4 +145,5 @@ const Dd = styled.dd`
   font-size: 1rem;
   margin-bottom: ${props => (props.bottom ? props.bottom : "")};
   font-weight: 500;
+  line-height: 1.3;
 `;

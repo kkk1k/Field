@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import styled from "styled-components";
+import {Swiper, SwiperSlide} from "swiper/react";
+import "swiper/swiper-bundle.css";
 import {Pagination} from "@mui/material";
 import Dropdown from "../components/Dropdown";
 import H2 from "../styles/H2";
@@ -44,10 +46,22 @@ function FieldNews() {
   return (
     <>
       <H2>NEWS</H2>
-      <Image src={new1} />
-      <Image src={new2} />
-      <Image src={new3} />
-      <Image src={new4} />
+      <SwiperContainer>
+        <Swiper slidesPerView={1.1} spaceBetween={10}>
+          <SwiperSlide>
+            <Image width='100%' src={new1} />
+          </SwiperSlide>
+          <SwiperSlide>
+            <Image width='100%' src={new1} />
+          </SwiperSlide>
+          <SwiperSlide>
+            <Image width='100%' src={new1} />
+          </SwiperSlide>
+          <SwiperSlide>
+            <Image width='100%' src={new1} />
+          </SwiperSlide>
+        </Swiper>
+      </SwiperContainer>
       <Div>
         <Input placeholder='검색어를 입력해주세요' />
         <Image src={searchIcon} width='20px' height='20px' />
@@ -81,6 +95,13 @@ function FieldNews() {
 }
 
 export default FieldNews;
+
+const SwiperContainer = styled.div`
+  width: ${props => (props.width ? props.width : "80%")};
+  margin-left: ${props => (props.ml ? props.ml : "10%")};
+  margin-right: ${props => (props.mr ? props.mr : "10%")};
+  margin-bottom: 2rem;
+`;
 
 const H3Wrapper = styled.div`
   margin-top: 20px;
