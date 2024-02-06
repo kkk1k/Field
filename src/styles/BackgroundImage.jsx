@@ -10,11 +10,6 @@ const BackgroundImage = styled.section`
     url(${props => props.src});
   background-position: center;
   background-size: cover;
-  padding-top: ${props => (props.pt ? props.pt : "")};
-  padding-bottom: ${props => (props.pb ? props.pb : "")};
-  padding-left: ${props => (props.pl ? props.pl : "")};
-  padding-right: ${props => (props.pr ? props.pr : "")};
-  background-size: cover;
   opacity: ${props => (props.opacity ? props.opacity : "")};
   justify-content: center;
   align-items: center;

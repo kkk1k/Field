@@ -8,6 +8,10 @@ import searchIcon from "../assets/Search.png";
 import FlexCenter from "../styles/FlexCenter";
 import scrollDown from "../assets/transfer-down-light.svg";
 import H3 from "../styles/H3";
+import new1 from "../assets/001.png";
+import new2 from "../assets/002.png";
+import new3 from "../assets/003.png";
+import new4 from "../assets/004.png";
 
 function FieldNews() {
   const newsArr = [
@@ -40,6 +44,10 @@ function FieldNews() {
   return (
     <>
       <H2>NEWS</H2>
+      <Image src={new1} />
+      <Image src={new2} />
+      <Image src={new3} />
+      <Image src={new4} />
       <Div>
         <Input placeholder='검색어를 입력해주세요' />
         <Image src={searchIcon} width='20px' height='20px' />

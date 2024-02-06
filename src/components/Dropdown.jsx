@@ -10,7 +10,7 @@ function Dropdown({label, menuItemList}) {
   };
 
   return (
-    <CustomFormControl variant='outlined' sx={{m: 1, minWidth: 350}}>
+    <CustomFormControl variant='outlined'>
       <CustomInputLabel id='demo-simple-select-helper-label'>{label}</CustomInputLabel>
       <CustomSelect
         labelId='demo-simple-select-helper-label'
@@ -24,12 +24,8 @@ function Dropdown({label, menuItemList}) {
             horizontal: "left",
           },
           transformOrigin: {
-            vertical: "bottom",
+            vertical: "top",
             horizontal: "left",
-          },
-          style: {
-            left: "0.5rem", // 드롭다운의 왼쪽 위치를 조정
-            top: "1.25rem", // 드롭다운의 상단 위치를 조정 (필요한 경우)
           },
           getContentAnchorEl: null, // 드롭다운의 위치를 anchorOrigin에 맞게 조정하기 위해 필요할 수 있습니다.
         }}
@@ -57,6 +53,9 @@ Dropdown.defaultProps = {
 export default Dropdown;
 
 const CustomFormControl = styled(FormControl)`
+  && {
+    min-width: 100%; /* 또는 다른 값을 적용하세요 */
+  }
   .MuiOutlinedInput-root {
     fieldset {
       border-color: white; // 테두리 색상을 하얀색으로 변경
@@ -81,7 +80,6 @@ const CustomSelect = styled(Select)`
   .MuiSelect-select {
     // Material UI 내부 클래스에 스타일 적용
     color: white;
-    padding-left: 1.25rem;
   }
   .MuiSelect-icon {
     // 드롭다운 아이콘 스타일 변경

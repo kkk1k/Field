@@ -6,10 +6,11 @@ import MenuContents from "./MenuContents";
 
 const TopInfo = styled.header`
   display: flex;
-  padding: 0 2.5%;
   align-items: center;
   background-color: #000b26;
   height: 4.5rem;
+  padding-left: 10%;
+  padding-right: 10%;
   position: sticky;
   justify-content: space-between;
   top: 0;
@@ -27,7 +28,6 @@ const TopInfo = styled.header`
 `;
 
 const HomeLogo = styled.div`
-  margin: 0 1rem;
   &:hover {
     cursor: pointer;
   }

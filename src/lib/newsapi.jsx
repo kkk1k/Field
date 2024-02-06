@@ -1,8 +1,8 @@
 import PocketBase from "pocketbase";
 
-export default async function NewsListByCategory(category) {
+export async function NewsListByCategory(category) {
   try {
-    const pb = new PocketBase("http://127.0.0.1:8090");
+    const pb = new PocketBase("https://field.pockethost.io");
     const resultList = await pb.collection("news").getList(1, 50, {
       filter: `category = "${category}"`,
     });

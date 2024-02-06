@@ -12,22 +12,16 @@ import theme from "../theme";
 import campBackgroundImage1 from "../assets/camp1.png";
 import campBackgroundImage2 from "../assets/camp2.png";
 import campBackgroundImage3 from "../assets/camp3.png";
+import campTimeline from "../assets/campTimeline.png";
 import Dropdown from "../components/Dropdown";
 
 function FieldCamp() {
   return (
     <>
-      <BackgroundImage
-        position='relative'
-        src={campBackgroundImage}
-        pl='2rem'
-        pr='2rem'
-        opacity='0.9'
-        height='90vh'
-      >
+      <BackgroundImage position='relative' src={campBackgroundImage} opacity='0.9' height='90vh'>
         <FlexCenter>
           <H2>Field Camp</H2>
-          <H3>팀원과 함께 여러분의 열정을 보여주세요!!</H3>
+          <H3>팀원과 함께 여러분의 열정을 보여주세요!!!!!</H3>
         </FlexCenter>
 
         <FlexCenter bottom='1rem' position='absolute'>
@@ -45,7 +39,7 @@ function FieldCamp() {
       <Container>
         <H3 margin='40px 0 0 0'>FieldCamp 소개</H3>
         <Dl>
-          <Dt color='red' top='40px'>
+          <Dt color='red' top='2.5rem'>
             FieldCamp란
           </Dt>
           <Dd>
@@ -60,7 +54,7 @@ function FieldCamp() {
             나아가기 위한 역량을 기를 수 있습니다.
           </Dd>
           <Dt>컴페티션</Dt>
-          <Dd bottom='20px'>
+          <Dd bottom='2.5rem'>
             컴페티션이란 FIELD CAMP의 핵심 행사로서, 전국의 산업공학도들이 함께 모여 제시되는 문제에
             대하여 산업공학적 시각으로 함께 해결하고 겨루는 단기 프로젝트 공모전입니다. 해마다 달리
             주어지는 주제에 맞추어 문제를 정의하고, 산업공학적 지식을 활용하여 참신한 해결방안을
@@ -68,45 +62,33 @@ function FieldCamp() {
           </Dd>
         </Dl>
       </Container>
-      <BackgroundImage
-        position='relative'
-        pl='2rem'
-        pr='2rem'
-        height='80vh'
-        src={campBackgroundImage1}
-      >
-        <FlexCenter>
+      <BackgroundImage position='relative' height='80vh' src={campBackgroundImage1}>
+        <FlexCenter pl='10%' pr='10%'>
           <H2>진행방식</H2>
           <H3>ON/OFF blended</H3>
           <Span>본 캠프 2박 3일을 포함하여 사전 데모데이를 통해 팀원들과 친해지세요.</Span>
         </FlexCenter>
       </BackgroundImage>
-      <BackgroundImage
-        position='relative'
-        pl='2rem'
-        pr='2rem'
-        height='80vh'
-        src={campBackgroundImage2}
-      >
-        <FlexCenter>
+      <BackgroundImage position='relative' height='80vh' src={campBackgroundImage2}>
+        <FlexCenter pl='10%' pr='10%'>
           <H3>Various program</H3>
           <Span>다양한 인적 교류 활성화 프로그램을 진행합니다.</Span>
         </FlexCenter>
       </BackgroundImage>
-      <BackgroundImage
-        position='relative'
-        pl='2rem'
-        pr='2rem'
-        height='80vh'
-        src={campBackgroundImage3}
-      >
-        <FlexCenter>
+      <BackgroundImage position='relative' height='80vh' src={campBackgroundImage3}>
+        <FlexCenter pl='10%' pr='10%'>
           <H3>Connection with Professor</H3>
           <Span>산업공학과 출신 기업인, 교수님과 소통하세요.</Span>
         </FlexCenter>
       </BackgroundImage>
-      <H2>역대 FieldCamp</H2>
-      <Dropdown label='년도별 캠프' menuItemList={["1월", "2월", "3월"]} />
+      <Container>
+        <H2>역대 FieldCamp</H2>
+        <Dropdown label='년도별 캠프' menuItemList={["1월", "2월", "3월"]} />
+        {/* <Image>asd</Image>
+        <Image>asd</Image> */}
+        <H2 color='yellow'>Time Line</H2>
+        <Image width='12rem' src={campTimeline} />
+      </Container>
     </>
   );
 }
@@ -115,13 +97,17 @@ export default FieldCamp;
 const Container = styled.div`
   margin-left: 10%;
   margin-right: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Button = styled.button`
   background: ${theme.colors.yellow};
   color: ${theme.colors.red};
-  padding: 10px;
-  margin-bottom: 20px;
+  padding: 0.625rem;
+  margin-bottom: 1.25rem;
   border: none;
   border-radius: 10%;
   font-weight: bold;
@@ -133,13 +119,14 @@ const Dl = styled.dl`
 `;
 
 const Dt = styled.dt`
-  font-size: 20px;
-  margin-top: ${props => (props.top ? props.top : "40px")};
-  margin-bottom: 20px;
+  font-size: 1.25rem;
+  margin-top: ${props => (props.top ? props.top : "2.5rem")};
+  margin-bottom: 1.25rem;
   color: ${props => (props.color ? theme.colors[props.color] : theme.colors.yellow)};
 `;
 
 const Dd = styled.dd`
-  font-size: 16px;
+  font-size: 1rem;
   margin-bottom: ${props => (props.bottom ? props.bottom : "")};
+  font-weight: 500;
 `;
