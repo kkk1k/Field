@@ -9,6 +9,7 @@ const Image = styled.img`
   margin-left: ${props => (props.ml ? props.ml : "")};
   margin-right: ${props => (props.mr ? props.mr : "")};
   border-radius: ${props => (props.radius ? props.radius : "")};
+  align-self: ${props => (props.alignSelf ? props.alignSelf : "")};
 `;
 
 export default Image;

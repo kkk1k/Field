@@ -23,6 +23,7 @@ const InfoContanier = styled.div`
   p {
     color: white;
     font-size: 0.75rem;
+    line-height: 1.3;
     margin:1rem 1.5rem;
   }
   ,

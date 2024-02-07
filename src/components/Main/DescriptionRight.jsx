@@ -1,20 +1,36 @@
 import React from "react";
+import styled from "styled-components";
+import Prototypes from "prop-types";
 import FlexBox from "../../styles/FlexBox";
 import Image from "../../styles/Image";
 import Span from "../../styles/Span";
-import logo from "../../assets/fieldLogo.png";
 
-function DescriptionRight() {
+const TitleContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+`;
+
+function DescriptionRight({description, src, title, color}) {
   return (
-    <FlexBox ml='1.875rem' mb='3.75rem'>
-      <Span>
-        {" "}
-        Field화이팅 Field화이팅 Field화이팅 Field화이팅 Field화이팅 Field화이팅 Field화이팅
-        Field화이팅 Field화이팅 Field화이팅 Field화이팅 Field화이팅 Field화이팅{" "}
-      </Span>
-      <Image src={logo} width='8.75rem' height='6.25rem' ml='1.875rem' mr='1.875rem' />
+    <FlexBox ml='10%' mb='3.75rem'>
+      <TitleContainer>
+        <Span color={color} size='1rem' bold='bold'>
+          {title}
+        </Span>
+        <Span size='0.8rem'>{description}</Span>
+      </TitleContainer>
+      <Image src={src} width='8.75rem' height='6.875rem' ml='5%' mr='10%' />
     </FlexBox>
   );
 }
+
+DescriptionRight.propTypes = {
+  title: Prototypes.string.isRequired,
+  description: Prototypes.string.isRequired,
+  src: Prototypes.string.isRequired,
+  color: Prototypes.string.isRequired,
+};
 
 export default DescriptionRight;
