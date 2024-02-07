@@ -1,15 +1,18 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import {InputLabel, MenuItem, FormControl, Select} from "@mui/material";
 
 function Dropdown({label, menuItemList, onChange, value}) {
+  const [labelValue, setLabelValue] = useState(label);
   const handleValueChange = event => {
     onChange(event.target.value); // 부모 컴포넌트로 선택된 값을 전달
+    setLabelValue(event.target.value);
   };
+
   return (
     <CustomFormControl variant='outlined'>
-      <CustomInputLabel id='demo-simple-select-helper-label'>{label}</CustomInputLabel>
+      <CustomInputLabel id='demo-simple-select-helper-label'>{labelValue}</CustomInputLabel>
       <CustomSelect
         labelId='demo-simple-select-helper-label'
         id='demo-simple-select-helper'
@@ -29,7 +32,9 @@ function Dropdown({label, menuItemList, onChange, value}) {
         }}
       >
         {menuItemList.map(item => (
-          <MenuItem value={item}>{item}</MenuItem>
+          <MenuItem key={item} value={item}>
+            {item}
+          </MenuItem>
         ))}
       </CustomSelect>
     </CustomFormControl>
@@ -40,7 +45,7 @@ Dropdown.propTypes = {
   label: PropTypes.string, // 'value' prop의 타입을 string으로 변경 (예시)
   menuItemList: PropTypes.arrayOf(PropTypes.string), // 'menuItemList'는 문자열의 배열로 변경 (예시)
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.number,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 // defaultProps 선언
@@ -54,17 +59,16 @@ export default Dropdown;
 
 const CustomFormControl = styled(FormControl)`
   && {
-    min-width: 100%; /* 또는 다른 값을 적용하세요 */
+    min-width: 100%;
   }
   .MuiOutlinedInput-root {
     fieldset {
-      border-color: white; // 테두리 색상을 하얀색으로 변경
-    }
+      border-color: white; 
     &:hover fieldset {
-      border-color: white; // 호버 시 테두리 색상을 하얀색으로 변경
+      border-color: white; 
     }
     &.Mui-focused fieldset {
-      border-color: white; // 포커스 시 테두리 색상을 하얀색으로 변경
+      border-color: white; 
       color: white;
     }
   }

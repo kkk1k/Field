@@ -4,21 +4,37 @@ import {Swiper, SwiperSlide} from "swiper/react";
 import "swiper/swiper-bundle.css";
 import Dropdown from "../Dropdown";
 import H2 from "../../styles/H2";
-import CampApi from "../../lib/Apiservice";
+import {CampApi, CampyearApi} from "../../lib/Apiservice";
 import Image from "../../styles/Image";
+import Span from "../../styles/Span";
 
 function CardCamp() {
   const [year, setYear] = useState(2023);
+  const [campYearData, setCampYearData] = useState([]);
   const [campData, setCampData] = useState([]);
   const handleYearChange = value => {
     setYear(value);
   };
+
+  const getYearData = async () => {
+    try {
+      const response = await CampyearApi();
+      const years = response.map(item => item.year);
+      setCampYearData(years);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getYearData();
+  }, []);
+
   const imageUrl = `${process.env.REACT_APP_URL}api/files/chlj2bc39fagbcf/`;
   const getData = async () => {
     try {
       const response = await CampApi(year);
       setCampData(response);
-      console.log(response[0].file);
     } catch (err) {
       console.log(err);
     }
@@ -31,12 +47,12 @@ function CardCamp() {
   return (
     <>
       <H2>역대 FieldCamp</H2>
-      <Dropdown label='년도별 캠프' menuItemList={[2023, 2022, 2021]} onChange={handleYearChange} />
+      <Dropdown label='년도별 캠프' menuItemList={campYearData} onChange={handleYearChange} />
       {/* 조건부 렌더링 + 중첩 map 사용 */}
       {campData.length > 0 ? (
-        campData.map((camp, index) => (
+        campData.map(camp => (
           <>
-            <H2>{index + 1}등 topic</H2>
+            <H2>{camp.topic} topic</H2>
             <SwiperContainer>
               <Swiper slidesPerView={1} spaceBetween={10}>
                 {camp.file.map((file, idx) => (
@@ -53,7 +69,9 @@ function CardCamp() {
           </>
         ))
       ) : (
-        <p>데이터가 없습니다.</p> // 데이터가 없을 경우 표시할 메시지
+        <Span mt='2rem' size='1.5rem'>
+          아직 준비되지 않았습니다.
+        </Span> // 데이터가 없을 경우 표시할 메시지
       )}
     </>
   );
@@ -62,5 +80,5 @@ function CardCamp() {
 export default CardCamp;
 
 const SwiperContainer = styled.div`
-  width: ${props => (props.width ? props.width : "80%")};
+  width: ${props => (props.width ? props.width : "100%")};
 `;
