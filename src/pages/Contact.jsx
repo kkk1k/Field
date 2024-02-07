@@ -5,14 +5,14 @@ import ContactContent from "../components/Contact/ContactContent";
 export default function Contact() {
   const [isAgree, setIsAgree] = useState(false);
 
-  const formHandler = showForm => {
-    setIsAgree(showForm);
+  const formHandler = agree => {
+    setIsAgree(agree);
   };
 
   return (
     <>
       <ContactContent onAgree={formHandler} />
-      {isAgree ? <ContactForm /> : null}
+      <ContactForm agree={isAgree} />
     </>
   );
 }

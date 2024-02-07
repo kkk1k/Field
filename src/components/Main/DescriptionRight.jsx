@@ -16,10 +16,10 @@ function DescriptionRight({description, src, title, color}) {
   return (
     <FlexBox ml='10%' mb='3.75rem'>
       <TitleContainer>
-        <Span color={color} size='1.1rem' bold='bold'>
+        <Span color={color} size='1rem' bold='bold'>
           {title}
         </Span>
-        <Span>{description}</Span>
+        <Span size='0.8rem'>{description}</Span>
       </TitleContainer>
       <Image src={src} width='8.75rem' height='6.875rem' ml='5%' mr='10%' />
     </FlexBox>

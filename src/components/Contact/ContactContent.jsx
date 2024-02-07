@@ -1,7 +1,26 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import theme from "../../theme";
 import H2 from "../../styles/H2";
+
+function Line() {
+  return (
+    <div style={{display: "flex", justifyContent: "center"}}>
+      <div
+        style={{
+          backgroundColor: theme.colors.white,
+          width: "80%",
+          height: "0.05rem",
+          display: "flex",
+          margin: "0.5rem 0 1rem 0 ",
+          alignItems: "center",
+          borderRadius: "10%",
+        }}
+      />
+    </div>
+  );
+}
 
 const Content = styled.div`
   display: flex;
@@ -10,29 +29,34 @@ const Content = styled.div`
   p {
     text-align: left;
     font-size: 0.75rem;
-    padding: 1rem 2rem;
-    width: 80%;
+    margin: 5% 10%;
   }
 `;
 
 const InputBox = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   margin: 1rem;
-  input {
-    font-size: 0.75rem;
+  font-size: 0.75rem;
+  .last {
+    margin: 0 0 0 4rem;
   }
+  input {
+    margin: 0 0.2rem 0 0;
+  }
+`;
+
+const InputText = styled.p`
+  font-size: 0.75rem;
+  color: #ff0202;
+  text-align: center;
 `;
 
 export default function ContactContent(props) {
   const {onAgree} = props;
   const [isCheckedAgree, setIsCheckedAgree] = useState(false);
   const [isCheckedDisagree, setIsCheckedDisagree] = useState(true);
-
-  ContactContent.propTypes = {
-    onAgree: PropTypes.func.isRequired,
-  };
 
   const checkAgreeHandler = () => {
     setIsCheckedAgree(true);
@@ -64,12 +88,23 @@ export default function ContactContent(props) {
         </p>
         <p>그 외 사항은 개인정보취급방침을 준수합니다.</p>
       </Content>
+      <Line />
+      <InputText> ※ 개인정보 수집이용에 동의하지 않으면 문의가 불가능합니다.</InputText>
       <InputBox>
         <input type='checkbox' checked={isCheckedAgree} onChange={checkAgreeHandler} />
         동의함
-        <input type='checkbox' checked={isCheckedDisagree} onChange={checkDisagreeHandler} />
+        <input
+          className='last'
+          type='checkbox'
+          checked={isCheckedDisagree}
+          onChange={checkDisagreeHandler}
+        />
         동의하지 않음
       </InputBox>
+      <Line />
     </>
   );
 }
+ContactContent.propTypes = {
+  onAgree: PropTypes.func.isRequired,
+};

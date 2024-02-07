@@ -1,22 +1,25 @@
 import {createGlobalStyle} from "styled-components";
 import theme from "./theme";
+import "./index.css";
 
 const GlobalStyle = createGlobalStyle`
 html{
     background: repeating-linear-gradient(#2C3B5F, #091A45, #2C3B5F 150vh);
     color: ${theme.colors.white};
-    font-family: 'SUIT-Regular';
+    font-family: 'Pretendard-Regular';
+
 },
-body,
+body
+{
+    line-height: 200%;
+},
 div,
 span,
 applet,
 object,
 iframe,
 h1,
-h2
-        
-,
+h2,
 h3,
 h4,
 h5,

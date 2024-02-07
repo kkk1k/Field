@@ -8,8 +8,9 @@ const Span = styled.span`
   margin-bottom: ${props => (props.mb ? props.mb : "")};
   margin-right: ${props => (props.mr ? props.mr : "")};
   margin-left: ${props => (props.ml ? props.ml : "")};
-  word-break: break-all;
-  text-align: ${props => (props.align ? "center" : "justify")};
+  word-break: keep-all;
+  grid-area: desc;
+  text-align: ${props => (props.align ? "center" : "")};
   line-height: 1.3;
   font-weight: ${props => (props.bold ? "bold" : "")};
   flex-basis: ${props => (props.basis ? props.basis : "")};

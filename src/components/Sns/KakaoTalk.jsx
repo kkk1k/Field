@@ -7,6 +7,7 @@ const kakaoTalkInfo = {
   image: "KakaoTalkLogo.png",
   imageAlt: "KakaoTalk Logo",
   linkTitle: "카카오톡 플러스 친구",
+  color: "#CE9811",
   link: "https://www.youtube.com/@field2023",
   title: "FIELD 카카오톡 플러스 친구",
   summary: "FIELD 에서 산업공학 홍보 및 활동을 남기기 위해 만든 SNS",
@@ -25,9 +26,7 @@ export default function KakaoTalk() {
   return (
     <SnsInfo info={kakaoTalkInfo}>
       <KakaoContent>
-        <a href={kakaoTalkInfo.link}>
-          <img src='KakaoContent1.png' alt='KakaoPlus' width={250} height={60} />
-        </a>
+        <img src='KakaoContent1.png' alt='KakaoPlus' width={250} height={60} />
       </KakaoContent>
     </SnsInfo>
   );

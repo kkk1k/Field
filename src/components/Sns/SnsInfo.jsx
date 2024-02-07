@@ -23,6 +23,7 @@ const InfoContanier = styled.div`
   p {
     color: white;
     font-size: 0.75rem;
+    line-height: 1.3;
     margin:1rem 1.5rem;
   }
   ,
@@ -31,7 +32,7 @@ const InfoContanier = styled.div`
 const TitleContanier = styled.div`
   display: flex;
   margin: 2rem;
-  justify-content: center;
+  align-items: center;
   h3 {
     font-size: 1.25rem;
     padding: 0 1rem 0 0.5rem;
@@ -39,26 +40,40 @@ const TitleContanier = styled.div`
 `;
 
 const LinkContanier = styled.div`
-  font-size: 0.75rem;
+  font-size: 0.6rem;
   display: flex;
-  justify-content: center;
-  margin: 0.25rem 0 2rem 0;
+  margin: 1rem 0 2rem 0;
+  border: 2px solid white;
+  border-radius: 1rem;
+  background: ${props => props.background};
+  a {
+    padding: 0.5rem 0.2rem 0.5rem 0.5rem;
+    font-size: 1rem;
+    color: white;
+    text-decoration: none;
+  }
+  p {
+    display: flex;
+  }
+  img {
+    margin: 0.2rem 0.4rem 0.2rem 0;
+  }
 `;
 
 function SnsInfo({info, children}) {
-  const {name, imageAlt, image, linkTitle, link, title, summary, description} = info;
+  const {name, imageAlt, image, linkTitle, link, title, summary, description, color} = info;
 
   return (
     <SnsContanier>
       <TitleContanier>
-        <img src={image} alt={imageAlt} width={35} height={25} />
+        <img src={image} alt={imageAlt} width={35} height={30} />
         <h3>{name}</h3>
       </TitleContanier>
       {children}
-      <LinkContanier>
+      <LinkContanier background={color}>
         <p>
-          {`${linkTitle} :`}
-          <a href={link}>{link}</a>
+          <a href={link}>{linkTitle} 바로가기</a>
+          <img src='Arrow.png' alt={imageAlt} width={20} height={25} />
         </p>
       </LinkContanier>
       <InfoContanier>
@@ -81,6 +96,7 @@ SnsInfo.propTypes = {
     title: PropTypes.string,
     summary: PropTypes.string,
     description: PropTypes.string,
+    color: PropTypes.string,
   }),
 };
 

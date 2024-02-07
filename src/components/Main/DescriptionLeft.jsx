@@ -19,7 +19,7 @@ function DescriptionLeft({description, title, src, color}) {
         <Span color={color} bold='bold' size='1.1rem'>
           {title}
         </Span>
-        <Span>{description}</Span>
+        <Span size='0.8rem'>{description}</Span>
       </TitleContainer>
     </FlexBox>
   );

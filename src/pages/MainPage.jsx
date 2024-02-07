@@ -1,13 +1,14 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Swiper, SwiperSlide} from "swiper/react";
 import "swiper/swiper-bundle.css";
-import logo from "../assets/fieldLogo.png";
-import mainBackgroundImage from "../assets/mainBackground.png";
-import profile1 from "../assets/profile1.png";
 import fieldIntro1 from "../assets/fieldIntro1.png";
 import fieldIntro2 from "../assets/fieldIntro2.png";
 import fieldIntro3 from "../assets/fieldIntro3.png";
+import logo from "../assets/fieldLogo.png";
+import mainBackgroundImage from "../assets/mainBackground.png";
+import profile1 from "../assets/profile1.png";
 import scrollDown from "../assets/transfer-down-light.svg";
+import ActivityIntro from "../components/Main/ActivityIntro";
 import DepartmentIntro from "../components/Main/DepartmentIntro";
 import DescriptionRight from "../components/Main/DescriptionLeft";
 import DescriptionLeft from "../components/Main/DescriptionRight";
@@ -15,6 +16,7 @@ import Profile from "../components/Main/Profile";
 import ProfileLeft from "../components/Main/ProfileLeft";
 import ReviewCard from "../components/Main/ReviewCard";
 import BackgroundImage from "../styles/BackgroundImage";
+import FadeImage from "../styles/FadeImage";
 import FlexBox from "../styles/FlexBox";
 import FlexCenter from "../styles/FlexCenter";
 import H2 from "../styles/H2";
@@ -24,6 +26,12 @@ import Span from "../styles/Span";
 import SwiperContainer from "../styles/SwiperContainer";
 
 function MainPage() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 isVisible 상태를 true로 설정하여 애니메이션을 시작합니다.
+    setIsVisible(true);
+  }, []);
   return (
     <>
       <BackgroundImage
@@ -81,6 +89,55 @@ function MainPage() {
         color='blue'
         src={fieldIntro3}
       />
+
+      <H3>인적, 학술적 교류를</H3>
+      <H3>실현하는 다양한 활동들</H3>
+      <SwiperContainer mt='1rem'>
+        <Swiper slidesPerView={1.2} spaceBetween={10} centeredSlides='true'>
+          <SwiperSlide>
+            <ActivityIntro
+              title='LT'
+              description='산업공학의 다양한 분야에서 활동 중인 전문가들과의 대화를 통해 진로에 대한 영감을 얻고, 현업에서의 성공 비법을 배워보세요.'
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <ActivityIntro
+              title='필드캠프'
+              description='매년 8월, 다양한 산업공학도들과 함께 인적, 학술적 교류의 기회를 제공합니다. 우리와 함께 미래를 열어가는 여정에 참여하세요!'
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <ActivityIntro
+              title='서포터즈'
+              description='청년일보 서포터즈로 참여함현 대학생 기자로 성장하는 특별한 기회가 여러분을 기다립니다.'
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <ActivityIntro
+              title='기업인 인터뷰'
+              description='산업공학의 다양한 분야에서 활동 중인 전문과들과의 대화를 통해 진로에 대한 영감을 얻고, 현업에서의 성공 비법을 배워보세요'
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <ActivityIntro
+              title='유튜브'
+              description='유튜브 채널을 통해 창의적이고 혁신적인 컨텐츠를 직접 기획하고 제작하는 현장을 경험해보세요!'
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <ActivityIntro
+              title='세미나'
+              description='세미나 활동을 통해 함께하는 학술적인 여정에서 산업공학의 깊이있는 통찰력을 개발하세요.'
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <ActivityIntro
+              title='고교방문설명회'
+              description='문제해결 능력을 키우는 산업공학의 매력을 전하며, 진로 선택에 도움을 주고자 합니다. 함께하면서 미래의 혁신을 주도할 준비를 하는 첫걸음을 함께 나아가요!'
+            />
+          </SwiperSlide>
+        </Swiper>
+      </SwiperContainer>
 
       <FlexCenter gap='0.5rem' mt='7.5rem'>
         <H2 margin='0rem 0rem 0rem 0rem' size='1.625rem'>
