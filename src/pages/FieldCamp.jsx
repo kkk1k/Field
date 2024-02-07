@@ -13,7 +13,6 @@ import campBackgroundImage1 from "../assets/camp1.png";
 import campBackgroundImage2 from "../assets/camp2.png";
 import campBackgroundImage3 from "../assets/camp3.png";
 import campTimeline from "../assets/campTimeline.png";
-import Dropdown from "../components/Dropdown";
 import CardCamp from "../components/Camp/CardCamp";
 
 function FieldCamp() {
@@ -103,6 +102,7 @@ function FieldCamp() {
       </BackgroundImage>
       <Container>
         <CardCamp />
+        <H2 color='yellow'>Time Line</H2>
         <Image width='12rem' src={campTimeline} />
       </Container>
     </>

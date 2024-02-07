@@ -1,14 +1,12 @@
-import React, {useState} from "react";
+import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import {InputLabel, MenuItem, FormControl, Select} from "@mui/material";
 
-function Dropdown({label, menuItemList}) {
-  const [dropDownValue, setDropDownValue] = useState("");
+function Dropdown({label, menuItemList, onChange, value}) {
   const handleValueChange = event => {
-    setDropDownValue(event.target.value);
+    onChange(event.target.value); // 부모 컴포넌트로 선택된 값을 전달
   };
-
   return (
     <CustomFormControl variant='outlined'>
       <CustomInputLabel id='demo-simple-select-helper-label'>{label}</CustomInputLabel>
@@ -16,7 +14,7 @@ function Dropdown({label, menuItemList}) {
         labelId='demo-simple-select-helper-label'
         id='demo-simple-select-helper'
         onChange={handleValueChange}
-        value={dropDownValue}
+        value={value}
         label={label}
         MenuProps={{
           anchorOrigin: {
@@ -41,13 +39,15 @@ function Dropdown({label, menuItemList}) {
 Dropdown.propTypes = {
   label: PropTypes.string, // 'value' prop의 타입을 string으로 변경 (예시)
   menuItemList: PropTypes.arrayOf(PropTypes.string), // 'menuItemList'는 문자열의 배열로 변경 (예시)
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.number,
 };
 
 // defaultProps 선언
 Dropdown.defaultProps = {
   label: "", // 'value'의 기본값은 빈 문자열로 설정
   menuItemList: [], // 'menuItemList'의 기본값은 빈 배열로 설정
-  // 'onChange'는 필수 prop이므로 defaultProps가 필요 없습니다.
+  value: "",
 };
 
 export default Dropdown;
