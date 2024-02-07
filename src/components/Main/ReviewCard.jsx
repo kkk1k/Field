@@ -17,7 +17,7 @@ const Card = styled.div`
 function ReviewCard({question, answer, school, name}) {
   return (
     <Card>
-      <H3 color='black' mb='1rem'>
+      <H3 color='black' margin='0 0 2rem 0'>
         {question}
       </H3>
       <Span color='black' mb='0.5rem'>

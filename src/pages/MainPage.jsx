@@ -16,7 +16,6 @@ import Profile from "../components/Main/Profile";
 import ProfileLeft from "../components/Main/ProfileLeft";
 import ReviewCard from "../components/Main/ReviewCard";
 import BackgroundImage from "../styles/BackgroundImage";
-import FadeImage from "../styles/FadeImage";
 import FlexBox from "../styles/FlexBox";
 import FlexCenter from "../styles/FlexCenter";
 import H2 from "../styles/H2";
@@ -24,6 +23,8 @@ import H3 from "../styles/H3";
 import Image from "../styles/Image";
 import Span from "../styles/Span";
 import SwiperContainer from "../styles/SwiperContainer";
+import NanumFont from "../styles/NanumFont";
+import GoblinOneFont from "../styles/GoblinOneFont";
 
 function MainPage() {
   const [isVisible, setIsVisible] = useState(false);
@@ -42,9 +43,13 @@ function MainPage() {
         opacity='0.9'
         height='90vh'
       >
-        <FlexCenter gap='0.5rem'>
-          <H2 margin='0rem 0rem 0rem 0rem'>산업을 지휘하자</H2>
-          <H2 margin='0rem 0rem 0rem 0rem'>더 넓은 FIELD로</H2>
+        <FlexCenter gap='0.5rem' mb='8rem'>
+          <H2 margin='0rem 0rem 0rem 0rem' size='2.5rem'>
+            산업을 지휘하자
+          </H2>
+          <H2 margin='0rem 0rem 0rem 0rem' size='2.5rem'>
+            더 넓은 FIELD로
+          </H2>
         </FlexCenter>
 
         <FlexCenter bottom='1rem' position='absolute' left='50%' transform='translate(-50%)'>
@@ -55,19 +60,22 @@ function MainPage() {
             height='1.875rem'
             object-fit='cover'
             alt='아래로 스크롤하세요'
+            alignSelf='center'
           />
         </FlexCenter>
       </BackgroundImage>
 
       <FlexCenter mr='10%' ml='10%'>
-        <H2>OUR GOAL</H2>
-        <Span size='1.625rem' mt='5rem'>
+        <GoblinOneFont mt='2rem' mb='2rem'>
+          OUR GOAL
+        </GoblinOneFont>
+        <NanumFont size='1.625rem' mt='5rem'>
           꿈과 비전, 생각을 공유하는
-        </Span>
-        <Span size='1.625rem' mt='1rem'>
+        </NanumFont>
+        <NanumFont size='1.625rem' mt='1rem'>
           교류의 장을 만든다
-        </Span>
-        <Image src={logo} width='8.75rem' height='8.75rem' mb='12rem' mt='12rem' />
+        </NanumFont>
+        <Image src={logo} width='10rem' height='10rem' mb='12rem' mt='8rem' alignSelf='center' />
       </FlexCenter>
 
       <DescriptionLeft
@@ -90,8 +98,12 @@ function MainPage() {
         src={fieldIntro3}
       />
 
-      <H3>인적, 학술적 교류를</H3>
-      <H3>실현하는 다양한 활동들</H3>
+      <NanumFont size='1.5rem' mt='0.5rem' mb='0.5rem'>
+        인적, 학술적 교류를
+      </NanumFont>
+      <NanumFont size='1.5rem' mt='0.5rem' mb='0.5rem'>
+        실현하는 다양한 활동들
+      </NanumFont>
       <SwiperContainer mt='1rem'>
         <Swiper slidesPerView={1.2} spaceBetween={10} centeredSlides='true'>
           <SwiperSlide>
@@ -174,12 +186,12 @@ function MainPage() {
 
       <DepartmentIntro />
 
-      <H3 mt='2rem' mb='2rem' size='1.625rem'>
+      <GoblinOneFont mt='2rem' mb='2rem' size='2rem'>
         How was your FIELD?
-      </H3>
+      </GoblinOneFont>
 
       <SwiperContainer>
-        <Swiper slidesPerView={1.1} spaceBetween={10}>
+        <Swiper slidesPerView={1.2} spaceBetween={10} centeredSlides='true'>
           <SwiperSlide>
             <ReviewCard
               question='Q. 필드를 통해 배운점은?'

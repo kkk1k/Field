@@ -18,7 +18,6 @@ const BackgroundImage = styled.section`
   opacity: ${props => (props.opacity ? props.opacity : "")};
   color: ${props => (props.color ? props.color : "white")};
   justify-content: center;
-  align-items: center;
 `;
 
 export default BackgroundImage;

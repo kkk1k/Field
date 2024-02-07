@@ -27,26 +27,23 @@ import SwiperContainer from "../../styles/SwiperContainer";
 
 const TitleContainer = styled.div`
   display: flex;
-  width: 100%;
   flex-direction: column;
   align-items: center;
   background-color: transparent;
   border-radius: 10px;
   border: 1px solid white;
-  padding: 1rem;
-  margin-top: 1rem;
+  padding: 1rem 0.5rem;
+  margin: 0 10%;
 `;
 
 const DetailContainer = styled.div`
   display: flex;
-  width: 100%;
   flex-direction: column;
   background-color: transparent;
   border-radius: 10px;
   border: 1px solid white;
   padding: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin: 1rem 10%;
 `;
 
 let departmentEnglish;
@@ -101,12 +98,12 @@ function DepartmentDetail({department}) {
       break;
   }
   return (
-    <FlexCenter ml='10%' mr='10%'>
+    <FlexCenter>
       <Span size='1.25rem' mt='1rem' mb='1rem'>
         {department}
       </Span>
-      <SwiperContainer ml='0' mr='0' width='100%'>
-        <Swiper slidesPerView={1.1} spaceBetween={10}>
+      <SwiperContainer width='100%'>
+        <Swiper slidesPerView={1.2} spaceBetween={10} centeredSlides='true'>
           {photo.map(pho => (
             <SwiperSlide>
               <Image src={pho} width='100%' radius='20px' height='250px' />
@@ -115,12 +112,16 @@ function DepartmentDetail({department}) {
         </Swiper>
       </SwiperContainer>
       <TitleContainer>
-        <Span size='1.5rem'>What&apos;s Activity</Span>
-        <Span size='1.3rem'>{departmentEnglish} Department</Span>
+        <Span size='1.5rem' stroke='0.5px #fff' color='transparent' bold='bold'>
+          What&apos;s Activity
+        </Span>
+        <Span size='1.5rem' stroke='0.5px #fff' color='transparent' bold='bold'>
+          {departmentEnglish} Department
+        </Span>
       </TitleContainer>
       <DetailContainer>
         {activity.map(act => (
-          <Span>{act}</Span>
+          <Span align='left'>{act}</Span>
         ))}
       </DetailContainer>
     </FlexCenter>

@@ -8,42 +8,46 @@ import FlexCenter from "../styles/FlexCenter";
 import roadMap from "../assets/roadMap.png";
 import H3 from "../styles/H3";
 import DepartmentDetail from "../components/Main/DepartmentDetail";
+import NanumFont from "../styles/NanumFont";
+import GoblinOneFont from "../styles/GoblinOneFont";
 
 function AboutField() {
   return (
     <div>
       <FlexBox direction='column' align='left' ml='10%' mr='10%' height='90vh' position='relative'>
-        <H2 size='1.7rem'>전국 대학생 산업공학도 동아리</H2>
-        <Span size='2.5rem'>
-          <Span size='2.5rem' color='red'>
+        <NanumFont size='1.5625rem' mt='2rem' mb='2rem'>
+          전국 대학생 산업공학도 동아리
+        </NanumFont>
+        <GoblinOneFont size='2.5rem'>
+          <GoblinOneFont size='2.5rem' color='red'>
             F
-          </Span>
+          </GoblinOneFont>
           uture
-        </Span>
-        <Span size='2.5rem'>
-          <Span size='2.5rem' color='blue'>
+        </GoblinOneFont>
+        <GoblinOneFont size='2.5rem'>
+          <GoblinOneFont size='2.5rem' color='blue'>
             I
-          </Span>
+          </GoblinOneFont>
           ndustrial
-        </Span>
-        <Span size='2.5rem'>
-          <Span size='2.5rem' color='blue'>
+        </GoblinOneFont>
+        <GoblinOneFont size='2.5rem'>
+          <GoblinOneFont size='2.5rem' color='blue'>
             E
-          </Span>
+          </GoblinOneFont>
           ngineering
-        </Span>
-        <Span size='2.5rem'>
-          <Span size='2.5rem' color='yellow'>
+        </GoblinOneFont>
+        <GoblinOneFont size='2.5rem'>
+          <GoblinOneFont size='2.5rem' color='yellow'>
             L
-          </Span>
+          </GoblinOneFont>
           eaders
-        </Span>
-        <Span size='2.5rem'>
-          <Span size='2.5rem' color='yellow'>
+        </GoblinOneFont>
+        <GoblinOneFont size='2.5rem'>
+          <GoblinOneFont size='2.5rem' color='yellow'>
             D
-          </Span>
+          </GoblinOneFont>
           reamers
-        </Span>
+        </GoblinOneFont>
         <Span mt='3rem' size='1.2rem'>
           FIELD란, ‘Future Industrial Engineering Leaders and Dreamers’ 의 약자로, 미래의 핵심
           리더들이 될 산업 공학도들이 모여 서로의 꿈과 비전, 생각 등을 공유할 수 있는 교류의 장을
@@ -57,14 +61,15 @@ function AboutField() {
             height='1.875rem'
             object-fit='cover'
             alt='아래로 스크롤하세요'
+            alignSelf='center'
           />
         </FlexCenter>
       </FlexBox>
       <FlexCenter>
-        <H2>Road of FIELD</H2>
+        <GoblinOneFont>Road of FIELD</GoblinOneFont>
         <Image src={roadMap} mb='2rem' />
       </FlexCenter>
-      <H3>부서 소개</H3>
+      <NanumFont>부서 소개</NanumFont>
       <DepartmentDetail department='기획부' />
       <DepartmentDetail department='대외협력부' />
       <DepartmentDetail department='컴페티션부' />

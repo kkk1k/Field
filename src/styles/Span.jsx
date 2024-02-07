@@ -10,10 +10,12 @@ const Span = styled.span`
   margin-left: ${props => (props.ml ? props.ml : "")};
   word-break: keep-all;
   grid-area: desc;
-  text-align: ${props => (props.align ? "center" : "")};
+  text-align: ${props => (props.align ? props.align : "")};
   line-height: 1.3;
   font-weight: ${props => (props.bold ? "bold" : "")};
   flex-basis: ${props => (props.basis ? props.basis : "")};
+  -webkit-text-stroke: ${props => (props.stroke ? props.stroke : "")};
+  opacity: ${props => (props.opacity ? props.opacity : "")};
 `;
 
 export default Span;
