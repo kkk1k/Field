@@ -9,7 +9,7 @@ function CardCamp() {
   const [campData, setCampData] = useState({});
   const getData = async () => {
     try {
-      const response = await CampApi(2023);
+      const response = await CampApi();
       console.log(response);
       setCampData(response.data);
       console.log(campData);
