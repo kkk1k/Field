@@ -1,10 +1,9 @@
 import React, {useRef, useState} from "react";
 import PropTypes from "prop-types";
 import PocketBase from "pocketbase";
-import styled, {keyframes} from "styled-components";
+import styled from "styled-components";
 import ContactModal from "./ContactModal";
 import theme from "../../theme";
-import Image from "../../styles/Image";
 
 const Notice = styled.span`
   position: relative;
@@ -20,7 +19,7 @@ const Notice = styled.span`
 `;
 
 const Label = styled.label`
-  font-size: 1rem;
+  font-size: 1.25rem;
   padding: 0.5rem 0 0.5rem 0;
   display: block;
 `;
@@ -57,7 +56,7 @@ const NomalSelect = styled.select`
   background-size: 1.4rem 1rem;
   border: none;
   border-bottom: 0.125rem solid gray;
-  font-size: ${props => (props.fs ? props.fs : "1.25rem")};
+  font-size: ${props => (props.fs ? props.fs : "1rem")};
 `;
 
 const Wrapper = styled.div`
@@ -75,11 +74,11 @@ const NomalInput = styled.input`
   box-sizing: border-box;
   border-radius: 0.5rem;
   background-color: rgba(83, 83, 83, 0.5);
-  font-size: 1.25rem;
+  font-size: ${props => (props.fs ? props.fs : "1rem")};
   color: rgba(255, 255, 255, 0.85);
   text-align: ${props => (props.ta ? props.ta : "")};
   &:disabled {
-    background-color: ${theme.colors.primary};
+    background-color: rgba(83, 83, 83, 0.5);
     color: rgba(255, 255, 255, 0.85);
   }
 `;
@@ -90,17 +89,21 @@ const TypeContainer = styled(Container)`
 `;
 
 const Button = styled.button`
-  font-size: 0.75rem;
+  margin: 0.5rem 0 0 0;
+  padding: 1.2rem 0;
+  font-size: 1rem;
   color: white;
   appearance: none;
   border: none;
-  width: 20%;
+  width: 6rem;
   height: 2rem;
-  background-color: gray;
+  border-radius: 0.5rem;
+  background: #3064e9;
+  border-right: 0.2rem solid #0436b6;
+  border-bottom: 0.2rem solid #0436b6;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 0 0 0.5rem;
   &:hover {
     cursor: pointer;
   }
@@ -140,9 +143,8 @@ export default function ContactForm({agree}) {
   const enteredTitle = useRef();
 
   function Message({type, name, title, text, email, phoneNumber}) {
-    return new Promise((resolve, reject) => {
-      const pb = new PocketBase("https://field.pockethost.io");
-
+    const pb = new PocketBase(process.env.REACT_APP_URL);
+    return new Promise(resolve => {
       try {
         const data = {
           Name: name,
@@ -152,6 +154,8 @@ export default function ContactForm({agree}) {
           Title: title,
           Content: text,
         };
+        console.log(pb);
+        console.log(process.env.REACT_APP_URL);
 
         setLoading(true);
 
@@ -218,8 +222,10 @@ export default function ContactForm({agree}) {
   function modalCloseHandler() {
     setIsModal(false);
     setError(false);
+    window.location.reload();
   }
 
+  console.log(process.env.REACT_APP_URL);
   return (
     <>
       <Form onSubmit={event => enteredHandler(event)}>
@@ -303,7 +309,7 @@ export default function ContactForm({agree}) {
           <Label htmlFor='email'>Email</Label>
           <Wrapper>
             <NomalInput
-              wd='33%'
+              wd='28%'
               type='text'
               id='email'
               name='frontEmail'
@@ -313,9 +319,10 @@ export default function ContactForm({agree}) {
             @
             {emailForm === "" ? (
               <NomalInput
+                fs='0.9rem'
                 id='backEmail'
                 name='backEmail'
-                wd='33%'
+                wd='28%'
                 pd='0 0'
                 type='text'
                 value={emailBack}
@@ -330,7 +337,7 @@ export default function ContactForm({agree}) {
                 id='backEmail'
                 name='backEmail'
                 pd='0 0'
-                wd='33%'
+                wd='28%'
                 type='text'
                 value={emailForm}
                 disabled
@@ -372,9 +379,7 @@ export default function ContactForm({agree}) {
         </Container>
 
         <SubmitButton>
-          <Button type='submit'>
-            등록 <Image src='right.png' alt='right arrow' width={30} height={20} />
-          </Button>
+          <Button type='submit'>등록</Button>
         </SubmitButton>
       </Form>
       {isModal && (

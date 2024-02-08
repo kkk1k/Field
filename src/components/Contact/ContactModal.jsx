@@ -42,27 +42,33 @@ const Modal = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: ${theme.colors.black};
+  background-color: #212121;
   height: 25%;
-  width: 60%;
+  width: 80%;
+  border-right: 0.35rem solid #141414;
+  border-bottom: 0.35rem solid #141414;
   border-radius: 2rem;
   animation: ${slideDownAnimation} 0.5s ease-in-out;
 `;
 
 const ModalPara = styled(Para)`
-  font-size: 0.8rem;
+  font-size: 1rem;
   margin: 0.7rem;
+  color: ${theme.colors.white};
 `;
 
 const ModalButton = styled.button`
   appearance: none;
-  font-size: 1rem;
+  font-size: 1.25rem;
   color: ${theme.colors.white};
   margin: 1rem 0 0 0;
-  background: ${theme.colors.gray};
+  background: #3064e9;
   border: none;
   padding: 0.4rem 0.5rem;
   border-radius: 0.5rem;
+  border-right: 0.2rem solid #0436b6;
+  border-bottom: 0.2rem solid #0436b6;
+  width: 8rem;
   &:hover {
     cursor: pointer;
   }
@@ -127,7 +133,7 @@ export default function ContactModal(props) {
         <Modal>
           {content}
           <ModalButton type='button' onClick={onClose}>
-            확인하기
+            확인
           </ModalButton>
         </Modal>
       </ModalBackground>

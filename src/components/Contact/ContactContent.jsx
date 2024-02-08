@@ -5,6 +5,8 @@ import {Para, Content} from "./ContactStyle";
 
 const ContentPara = styled(Para)`
   margin: 0 0 1.5rem 0;
+  line-height: 1.3;
+  word-break: keep-all;
 `;
 
 export default function ContactContent() {
