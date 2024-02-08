@@ -14,19 +14,26 @@ import campBackgroundImage2 from "../assets/camp2.png";
 import campBackgroundImage3 from "../assets/camp3.png";
 import campTimeline from "../assets/campTimeline.png";
 import CardCamp from "../components/Camp/CardCamp";
+import GoblinOneFont from "../styles/GoblinOneFont";
 
 function FieldCamp() {
   return (
     <>
-      <BackgroundImage position='relative' src={campBackgroundImage} opacity='0.9' height='90vh'>
-        <FlexCenter>
-          <H2>Field Camp</H2>
-          <H3 margin='0 0 2rem 0'>팀원과 함께 여러분의</H3>
-          <H3 margin='0 0 0 0'> 열정을 보여주세요!!!!!</H3>
+      <BackgroundImage position='relative' src={campBackgroundImage} height='90vh'>
+        <FlexCenter gap='0.5rem' mb='15rem'>
+          <GoblinOneFont size='2.5rem' mb='15rem'>
+            Field Camp
+          </GoblinOneFont>
+          <H3 size='2.5rem' margin='0 0 0 0' fontFamily="'Nanum Brush Script', cursive">
+            팀원과 함께
+          </H3>
+          <H3 size='2.5rem' margin='0 0 0 0' fontFamily="'Nanum Brush Script', cursive">
+            여러분의 열정을 보여주세요!!!!!
+          </H3>
         </FlexCenter>
 
-        <FlexCenter bottom='1rem' position='absolute'>
-          <Button>FieldCamp 신청하기</Button>
+        <FlexCenter bottom='1rem' position='absolute' left='50%' transform='translate(-50%)'>
+          <Button>FieldCamp 지원하기</Button>
           <Span color='white'>아래로 스크롤하세요.</Span>
           <Image
             src={scrollDown}
@@ -34,10 +41,11 @@ function FieldCamp() {
             height='1.875rem'
             object-fit='cover'
             alt='아래로 스크롤하세요'
+            alignSelf='center'
           />
         </FlexCenter>
       </BackgroundImage>
-      <Container>
+      <FlexCenter mr='10%' ml='10%'>
         <H3 margin='40px 0 0 0'>FieldCamp 소개</H3>
         <Dl>
           <Dt color='red' top='2.5rem'>
@@ -62,7 +70,7 @@ function FieldCamp() {
             강구함으로써 선의의 경쟁을 유도하고, 전공 역량과 팀워크를 기를 수 있습니다.
           </Dd>
         </Dl>
-      </Container>
+      </FlexCenter>
       <BackgroundImage position='relative' height='80vh' src={campBackgroundImage1}>
         <FlexCenter pl='10%' pr='10%'>
           <H3 margin='0 0 2rem 0'>ON/OFF blended</H3>
@@ -111,8 +119,6 @@ function FieldCamp() {
 export default FieldCamp;
 
 const Container = styled.div`
-  margin-left: 10%;
-  margin-right: 10%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -120,14 +126,18 @@ const Container = styled.div`
 `;
 
 const Button = styled.button`
-  background: ${theme.colors.yellow};
+type=button;
+  background: #d4e3c0;
   color: ${theme.colors.red};
-  padding: 0.625rem;
+  width: 10rem;
+  padding: 1rem;
   margin-bottom: 1.25rem;
   border: none;
-  border-radius: 10%;
+  border-radius: 5rem;
   font-weight: bold;
   font-family: "SUIT-Regular";
+  font-size: 1.25rem;
+  word-break: keep-all;
 `;
 
 const Dl = styled.dl`

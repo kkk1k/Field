@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
 html{
     background: repeating-linear-gradient(#2C3B5F, #091A45, #2C3B5F 150vh);
     color: ${theme.colors.white};
-    font-family: 'Pretendard-Regular';
+    font-family: 'SUIT-Regular';
 
 },
 body

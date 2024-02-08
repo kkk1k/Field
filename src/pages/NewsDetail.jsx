@@ -9,21 +9,22 @@ function NewsDetail() {
   const [detailData, setDetailData] = useState([]);
   const getData = async () => {
     try {
+      console.log(id);
       const response = await NewsDetailApi(id);
-      setDetailData(response);
       console.log(response);
-      console.log(response[0].Content);
+      setDetailData(response);
     } catch (err) {
       console.log(err);
     }
   };
+  console.log(detailData.contents);
   useEffect(() => {
     getData();
   }, []);
   return (
     <>
       <H2>News</H2>
-      {detailData.length > 0 ? <Span>{detailData[0].Content}</Span> : <Span>로딩중입니다</Span>}
+      {detailData ? <Span>{detailData.contents}</Span> : <Span>로딩중입니다</Span>}
     </>
   );
 }

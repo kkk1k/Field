@@ -7,6 +7,7 @@ const H3 = styled.h3`
   text-align: ${props => (props.align ? props.align : "center")};
   margin: ${props => (props.margin ? props.margin : "")};
   font-weight: bold;
+  font-family: ${props => (props.fontFamily ? props.fontFamily : "")};
 };
 `;
 

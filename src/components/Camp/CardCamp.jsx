@@ -7,6 +7,8 @@ import H2 from "../../styles/H2";
 import {CampApi, CampyearApi} from "../../lib/Apiservice";
 import Image from "../../styles/Image";
 import Span from "../../styles/Span";
+import SwiperContainer from "../../styles/SwiperContainer";
+import FlexCenter from "../../styles/FlexCenter";
 
 function CardCamp() {
   const [year, setYear] = useState(2023);
@@ -46,15 +48,17 @@ function CardCamp() {
 
   return (
     <>
-      <H2>역대 FieldCamp</H2>
-      <Dropdown label='년도별 캠프' menuItemList={campYearData} onChange={handleYearChange} />
+      <FlexCenter>
+        <H2>역대 FieldCamp</H2>
+        <Dropdown label='년도별 캠프' menuItemList={campYearData} onChange={handleYearChange} />
+      </FlexCenter>
       {/* 조건부 렌더링 + 중첩 map 사용 */}
       {campData.length > 0 ? (
         campData.map(camp => (
           <>
             <H2>{camp.topic} topic</H2>
             <SwiperContainer>
-              <Swiper slidesPerView={1} spaceBetween={10}>
+              <Swiper slidesPerView={1.2} spaceBetween={10} centeredSlides='true'>
                 {camp.file.map((file, idx) => (
                   <SwiperSlide>
                     <Image
@@ -78,7 +82,3 @@ function CardCamp() {
 }
 
 export default CardCamp;
-
-const SwiperContainer = styled.div`
-  width: ${props => (props.width ? props.width : "100%")};
-`;

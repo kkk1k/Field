@@ -11,13 +11,13 @@ import H3 from "../styles/H3";
 
 function FieldNews() {
   const [selectCategory, setSelectCategory] = useState("월간필드");
-  const category = ["월간필드", "취업/진로", "대외활동", "FIELD"];
+  const category = ["월간필드", "취업/진로", "공모전", "FIELD"];
   const [newsList, setNewsList] = useState([]);
   const [titleList, setTitleList] = useState([]);
-  const getData = async () => {
+  const getData = async label => {
     try {
-      const response = await NewsApi(selectCategory);
-      const title = response.map(item => item.Title);
+      const response = await NewsApi(label);
+      const title = response.map(item => item.title);
       console.log(title);
       setTitleList(title);
       setNewsList(response);
@@ -28,20 +28,26 @@ function FieldNews() {
   };
 
   useEffect(() => {
-    getData();
-  }, [selectCategory]);
+    getData("월간필드");
+  }, []);
 
+  // useEffect(() => {
+  //   getData(selectCategory);
+  // }, [selectCategory]);
   const itemPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
+
   const firstItemPerPage = (currentPage - 1) * itemPerPage;
   const lastItemPerPage = firstItemPerPage + 9;
   const currentItemPerPage = titleList.slice(firstItemPerPage, lastItemPerPage + 1);
-  console.log(currentItemPerPage);
   const handlePageChage = (event, page) => {
     setCurrentPage(page);
   };
+
   const handleButtonClick = item => {
     setSelectCategory(item);
+    getData(item);
+    console.log(newsList);
   };
 
   return (
@@ -54,14 +60,15 @@ function FieldNews() {
           onClick={() => handleButtonClick(item)}
         />
       ))}
-      {selectCategory !== null && selectCategory === "월간필드" ? (
+
+      {newsList.length > 0 && selectCategory === "월간필드" ? (
         <MonthField data={newsList} />
       ) : (
         <>
           <H3 margin='2rem 0 2rem 0'>{selectCategory}</H3>
           {newsList.map(item => (
             <Link to={`/detail/${item.id}`}>
-              <P>{item.Title}</P>
+              <P>{item.title}</P>
             </Link>
           ))}
           <CustomPagination
