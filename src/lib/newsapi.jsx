@@ -16,8 +16,8 @@ export async function NewsListByCategory(category) {
 export async function NewsDetail(id) {
   try {
     const pb = new PocketBase("http://127.0.0.1:8090");
-    const record = await pb.collection("newsDetail").getFirstListItem(`title="${id}"`, {
-      expand: "author,time,content,file",
+    const record = await pb.collection("NewsDetail").getFirstListItem(`NewsId="${id}"`, {
+      expand: "Athor,Time,Content,File",
     });
     return record;
   } catch (error) {
@@ -25,11 +25,13 @@ export async function NewsDetail(id) {
   }
 }
 
+// 여기 밑에 아이디는 NewsDetail에서 나온 id사용하시면됩니다.
+
 export async function NewsMonth(id) {
   try {
     const pb = new PocketBase("http://127.0.0.1:8090");
-    const record = await pb.collection("newsDetail").getFirstListItem(`title="${id}"`, {
-      expand: "img",
+    const record = await pb.collection("NewsDetail").getFirstListItem(`NewsId="${id}"`, {
+      expand: "Img",
     });
     return record;
   } catch (error) {

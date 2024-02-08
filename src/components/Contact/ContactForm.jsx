@@ -1,152 +1,133 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useRef, useState} from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import PocketBase from "pocketbase";
+import styled, {keyframes} from "styled-components";
 import ContactModal from "./ContactModal";
 import theme from "../../theme";
-import Message from "../../lib/contactApi";
+import Image from "../../styles/Image";
+
+const Notice = styled.span`
+  position: relative;
+
+  &::before {
+    content: "*";
+    color: #ff0202;
+    position: absolute;
+    margin: 0;
+    font-size: 1.5rem;
+    left: -1rem;
+  }
+`;
+
+const Label = styled.label`
+  font-size: 1rem;
+  padding: 0.5rem 0 0.5rem 0;
+  display: block;
+`;
 
 const Form = styled.form`
-  margin: 0 10%;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  section {
-    padding: 0 0 1rem 0;
-  }
 `;
 
-const Container = styled.section`
+const Container = styled.div`
   color: ${theme.colors.white};
-  .notice {
-    position: relative;
-    p {
-      position: absolute;
-      color: #ff0202;
-      font-size: 1.5rem;
-      left: -1rem;
-      top: -0.5rem;
-    }
-  }
-  h4 {
-    margin: 0 0 0.5rem 0;
-  }
-  select {
-    color: gray;
-    margin: 0 0 0 1rem;
-    width: 5rem;
-    padding: 0.2em 0.5em;
-    appearance: none;
-    background: url("downward-arrow.png") no-repeat 95% 50%;
-    background-size: 1.5rem 1.5rem;
-    border: none;
-    border-bottom: 0.125rem solid gray;
-    font-size: 1rem;
-  }
-  input {
-    padding: 0;
-    width: 100%;
-    height: 2rem;
-    border: none;
-    padding: 0.2rem 0.5rem;
-    box-sizing: border-box;
-    border-radius: 0.5rem;
-    background-color: rgba(83, 83, 83, 0.5);
-    font-size: 1.25rem;
-    color: rgba(255, 255, 255, 0.85);
-  }
-  textarea {
-    box-sizing: border-box;
-    width: 100%;
-    height: 8rem;
-    border: none;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    background-color: rgba(83, 83, 83, 0.5);
-  }
+  padding: 0.5rem 0;
 `;
 
-const TypeContainer = styled(Container)`
+const TextBox = styled.textarea`
+  box-sizing: border-box;
+  color: ${theme.colors.white};
+  width: 100%;
+  height: 8rem;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: rgba(83, 83, 83, 0.5);
+`;
+
+const NomalSelect = styled.select`
+  color: gray;
+  margin: ${props => (props.mg ? props.mg : "0 0 0 1rem")};
+  width: ${props => (props.wd ? props.wd : "5rem")};
+  padding: ${props => (props.pd ? props.pd : "0.2em 0.5em")};
+  appearance: none;
+  background: url("down.png") no-repeat 100% 50%;
+  background-size: 1.4rem 1rem;
+  border: none;
+  border-bottom: 0.125rem solid gray;
+  font-size: ${props => (props.fs ? props.fs : "1.25rem")};
+`;
+
+const Wrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 `;
 
-const PhoneContainer = styled(Container)`
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
-
-  select {
-    flex-grow: 1;
-    margin: 0 0.5rem 0 0;
-    font-size: 1.5rem;
-  }
-  input {
-    flex-grow: 1;
-    width: 5rem;
-    margin: 0 0.5rem;
-    padding: 0 0.25rem;
-    text-align: center;
-  }
-  .lastInput {
-    margin-right: 0;
-  }
-`;
-
-const EmailContainer = styled(Container)`
-  select {
-    padding: 0.5em 0 0.5em 0;
-    margin: 0 0 0 0;
-    flex-grow: 1.5;
-  }
-  input {
-    width: 30%;
-    font-size: 1rem;
-    margin: 0 0.2rem 0 0;
-  }
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  input:disabled {
+const NomalInput = styled.input`
+  padding: 0;
+  height: 2.4rem;
+  width: ${props => (props.wd ? props.wd : "100%")};
+  border: none;
+  padding: 0.2rem 0.5rem;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+  background-color: rgba(83, 83, 83, 0.5);
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: ${props => (props.ta ? props.ta : "")};
+  &:disabled {
     background-color: ${theme.colors.primary};
     color: rgba(255, 255, 255, 0.85);
   }
 `;
 
-const SubmitButton = styled.div`
+const TypeContainer = styled(Container)`
+  display: flex;
+  align-items: left;
+`;
+
+const Button = styled.button`
+  font-size: 0.75rem;
+  color: white;
+  appearance: none;
+  border: none;
+  width: 20%;
+  height: 2rem;
+  background-color: gray;
   display: flex;
   justify-content: center;
-  button {
-    font-size: 0.75rem;
-    color: white;
-    appearance: none;
-    border: none;
-    width: 20%;
-    height: 2rem;
-    background-color: gray;
-  }
-  button:hover {
+  align-items: center;
+  padding: 0 0 0 0.5rem;
+  &:hover {
     cursor: pointer;
   }
 `;
+
+const Option = styled.option``;
+
+const SubmitButton = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 export default function ContactForm({agree}) {
   const patternPhone = /[0-9]{3}-[0-9]{4,}/;
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   const [emailForm, setEmailForm] = useState("");
   const [emailBack, setEmailBack] = useState("");
   const [isModal, setIsModal] = useState(false);
-  const [summitedData, setSummitedData] = useState({});
-  const [agreeAdd, setAgreeAdd] = useState();
+  const [isValid, setIsValid] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [Error, setError] = useState(false);
 
   const [isNameValid, setIsNameValid] = useState(undefined);
   const [isPhoneValid, setIsPhoneValid] = useState(undefined);
   const [isEmailValid, setIsEmailValid] = useState(undefined);
   const [isTitleValid, setIsTitleValid] = useState(undefined);
   const [isContentValid, setIsContentValid] = useState(undefined);
-  const [isValid, setIsValid] = useState(false);
 
   const enteredType = useRef();
   const enteredName = useRef();
@@ -158,16 +139,38 @@ export default function ContactForm({agree}) {
   const enteredText = useRef();
   const enteredTitle = useRef();
 
-  useEffect(() => {
-    if (isNameValid && isPhoneValid && isEmailValid && isTitleValid && isContentValid) {
-      setIsValid(true);
-    } else {
-      setIsValid(false);
-    }
-    if (summitedData && isValid && agreeAdd) {
-      Message(summitedData);
-    }
-  }, [isContentValid, isEmailValid, isNameValid, isPhoneValid, isTitleValid, agreeAdd]);
+  function Message({type, name, title, text, email, phoneNumber}) {
+    return new Promise((resolve, reject) => {
+      const pb = new PocketBase("https://field.pockethost.io");
+
+      try {
+        const data = {
+          Name: name,
+          Type: type,
+          Phone: phoneNumber,
+          Email: email,
+          Title: title,
+          Content: text,
+        };
+
+        setLoading(true);
+
+        pb.collection("Message")
+          .create(data)
+          .then(response => {
+            resolve(response);
+          })
+          .catch(() => {
+            setError(true);
+          })
+          .finally(() => {
+            setLoading(false);
+          });
+      } catch (error) {
+        setError(true);
+      }
+    });
+  }
 
   function emailBackHandler(event) {
     setEmailBack(event.target.value);
@@ -177,186 +180,211 @@ export default function ContactForm({agree}) {
     setEmailForm(event.target.value === "직접입력" ? "" : event.target.value);
   }
 
-  function EnteredTextValid() {
-    if (enteredName.current.value.trim() === "") {
-      setIsNameValid(false);
-    } else {
-      setIsNameValid(true);
-    }
-    if (enteredTitle.current.value.trim() === "") {
-      setIsTitleValid(false);
-    } else {
-      setIsTitleValid(true);
-    }
-    if (enteredText.current.value.trim() === "") {
-      setIsContentValid(false);
-    } else {
-      setIsContentValid(true);
-    }
-    if (
-      !patternPhone.test(
-        `${enteredSecondPhoneNumber.current.value}-${enteredThirdPhoneNumber.current.value}`,
-      )
-    ) {
-      setIsPhoneValid(false);
-    } else {
-      setIsPhoneValid(true);
-    }
-    if (
-      !emailPattern.test(`${enteredFrontEmail.current.value}@${enteredBackEmail.current.value}`)
-    ) {
-      setIsEmailValid(false);
-    } else {
-      setIsEmailValid(true);
-    }
-  }
   function enteredHandler(event) {
     event.preventDefault();
-    setSummitedData(prev => ({
-      ...prev,
-      type: enteredType.current.value,
-      name: enteredName.current.value,
-      title: enteredTitle.current.value,
-      text: enteredText.current.value,
-      email: `${enteredFrontEmail.current.value}@${enteredBackEmail.current.value}`,
-      phoneNumber: `${enteredFirstPhoneNumber.current.value}-${enteredSecondPhoneNumber.current.value}-${enteredThirdPhoneNumber.current.value}`,
-    }));
-    setAgreeAdd(agree);
-    EnteredTextValid();
+    let formIsValid = false;
+    const nameIsValid = enteredName.current.value.trim() !== "";
+    const titleIsValid = enteredTitle.current.value.trim() !== "";
+    const contentIsValid = enteredText.current.value.trim() !== "";
+    const phoneIsValid = patternPhone.test(
+      `${enteredSecondPhoneNumber.current.value}-${enteredThirdPhoneNumber.current.value}`,
+    );
+    const emailIsValid = emailPattern.test(
+      `${enteredFrontEmail.current.value}@${enteredBackEmail.current.value}`,
+    );
+
+    formIsValid = nameIsValid && titleIsValid && contentIsValid && phoneIsValid && emailIsValid;
+
+    setIsNameValid(nameIsValid);
+    setIsTitleValid(titleIsValid);
+    setIsContentValid(contentIsValid);
+    setIsPhoneValid(phoneIsValid);
+    setIsEmailValid(emailIsValid);
+    setIsValid(formIsValid);
+    if (formIsValid && agree) {
+      const summitedData = {
+        type: enteredType.current.value,
+        name: enteredName.current.value,
+        title: enteredTitle.current.value,
+        text: enteredText.current.value,
+        email: `${enteredFrontEmail.current.value}@${enteredBackEmail.current.value}`,
+        phoneNumber: `${enteredFirstPhoneNumber.current.value}-${enteredSecondPhoneNumber.current.value}-${enteredThirdPhoneNumber.current.value}`,
+      };
+      Message(summitedData);
+    }
     setIsModal(true);
   }
 
   function modalCloseHandler() {
     setIsModal(false);
-    if (summitedData && isValid && agreeAdd) {
-      window.location.reload();
-    }
+    setError(false);
   }
+
   return (
     <>
       <Form onSubmit={event => enteredHandler(event)}>
         <TypeContainer>
-          <h4>문의 유형</h4>
-
-          <select id='firstPhoneNumber' name='firstPhoneNumber' ref={enteredType}>
-            <option value='후원'>후원</option>
-            <option value='문의'>문의</option>
-            <option value='기타'>기타</option>
-          </select>
+          <Label htmlFor='type'>문의 유형</Label>
+          <NomalSelect id='type' name='yourInpuType' fs='1rem' ref={enteredType} autocomplete='off'>
+            <Option value='후원'>후원</Option>
+            <Option value='문의'>문의</Option>
+            <Option value='기타'>기타</Option>
+          </NomalSelect>
         </TypeContainer>
 
         <Container>
-          {isNameValid === false ? (
-            <span className='notice'>
-              <p>*</p>
-            </span>
-          ) : null}
-          <h4>이름 (회사)</h4>
-          <input type='text' ref={enteredName} />
+          {isNameValid === false ? <Notice /> : null}
+          <Label for='name'>이름 (회사)</Label>
+          <NomalInput type='text' id='name' name='name' ref={enteredName} autocomplete='name' />
         </Container>
 
-        <PhoneContainer>
-          {isPhoneValid === false ? (
-            <span className='notice'>
-              <p>*</p>
-            </span>
-          ) : null}
-          <h4>연락처</h4>
-
-          <div>
-            <select id='firstPhoneNumber' name='firstPhoneNumber' ref={enteredFirstPhoneNumber}>
-              <option value='010'>010</option>
-              <option value='02'>02</option>
-              <option value='032'>032</option>
-              <option value='033'>033</option>
-              <option value='041'>041</option>
-              <option value='042'>042</option>
-              <option value='043'>043</option>
-              <option value='044'>044</option>
-              <option value='051'>051</option>
-              <option value='052'>052</option>
-              <option value='053'>053</option>
-              <option value='054'>054</option>
-              <option value='011'>010</option>
-              <option value='016'>01</option>
-              <option value='017'>02</option>
-              <option value='018'>03</option>
-              <option value='019'>03</option>
-              <option value='070'>03</option>
-            </select>
+        <Container>
+          {isPhoneValid === false ? <Notice /> : null}
+          <Label htmlFor='phone'>연락처 </Label>
+          <Wrapper>
+            <NomalSelect
+              wd='20%'
+              pd='0.5rem 0 0.5rem 0.2rem'
+              mg='0.5rem 0'
+              id='phone'
+              name='firstPhoneNumber'
+              ref={enteredFirstPhoneNumber}
+              autocomplete='off'
+            >
+              <Option value='010'>010</Option>
+              <Option value='02'>02</Option>
+              <Option value='032'>032</Option>
+              <Option value='033'>033</Option>
+              <Option value='041'>041</Option>
+              <Option value='042'>042</Option>
+              <Option value='043'>043</Option>
+              <Option value='044'>044</Option>
+              <Option value='051'>051</Option>
+              <Option value='052'>052</Option>
+              <Option value='053'>053</Option>
+              <Option value='054'>054</Option>
+              <Option value='011'>010</Option>
+              <Option value='016'>01</Option>
+              <Option value='017'>02</Option>
+              <Option value='018'>03</Option>
+              <Option value='019'>03</Option>
+              <Option value='070'>03</Option>
+            </NomalSelect>
             -
-            <input type='text' maxLength='4' pattern='\d*' ref={enteredSecondPhoneNumber} />-
-            <input
+            <NomalInput
+              id='secondPhoneNumber'
+              name='secondPhoneNumber'
+              ta='center'
+              wd='30%'
+              type='text'
+              maxLength='4'
+              pattern='\d*'
+              ref={enteredSecondPhoneNumber}
+              autocomplete='phone'
+            />
+            -
+            <NomalInput
+              id='lastPhoneNumber'
+              name='lastPhoneNumber'
+              ta='center'
+              wd='30%'
               type='text'
               maxLength='4'
               pattern='\d*'
               ref={enteredThirdPhoneNumber}
               className='lastInput'
+              autocomplete='phone'
             />
-          </div>
-        </PhoneContainer>
+          </Wrapper>
+        </Container>
 
-        <EmailContainer>
-          {isEmailValid === false ? (
-            <span className='notice'>
-              <p>*</p>
-            </span>
-          ) : null}
-          <h4>Email</h4>
-          <div>
-            <input type='text' ref={enteredFrontEmail} />@
+        <Container>
+          {isEmailValid === false ? <Notice /> : null}
+          <Label htmlFor='email'>Email</Label>
+          <Wrapper>
+            <NomalInput
+              wd='33%'
+              type='text'
+              id='email'
+              name='frontEmail'
+              ref={enteredFrontEmail}
+              autocomplete='email'
+            />
+            @
             {emailForm === "" ? (
-              <input
+              <NomalInput
+                id='backEmail'
+                name='backEmail'
+                wd='33%'
+                pd='0 0'
                 type='text'
                 value={emailBack}
-                onChange={emailBackHandler}
+                autocomplete='email'
+                onChange={e => {
+                  emailBackHandler(e);
+                }}
                 ref={enteredBackEmail}
               />
             ) : (
-              <input type='text' value={emailForm} disabled ref={enteredBackEmail} />
+              <NomalInput
+                id='backEmail'
+                name='backEmail'
+                pd='0 0'
+                wd='33%'
+                type='text'
+                value={emailForm}
+                disabled
+                ref={enteredBackEmail}
+                autocomplete='email'
+              />
             )}
-            <select
-              id='emailAdrress'
-              name='emailAdrress'
+            <NomalSelect
+              id='backEmailSelect'
+              name='backEmailSelect'
+              wd='30%'
+              pd='0.3rem 0.2rem 0.3rem 0'
+              mg='0 0 0 0'
               value={emailForm}
-              onChange={emailFormHandler}
+              onChange={e => {
+                emailFormHandler(e);
+              }}
             >
-              <option value=''>직접입력</option>
-              <option value='naver.com'>naver.com</option>
-              <option value='daum.net'>daum.net</option>
-              <option value='gmail.com'>gmail.com</option>
-              <option value='nate.com'>nate.com</option>
-              <option value='yahoo.co.kr'>yahoo.co.kr</option>
-            </select>
-          </div>
-        </EmailContainer>
-
-        <Container>
-          {isTitleValid === false ? (
-            <span className='notice'>
-              <p>*</p>
-            </span>
-          ) : null}
-          <h4> 제목 </h4>
-          <input type='text' ref={enteredTitle} />
+              <Option value=''>직접입력</Option>
+              <Option value='naver.com'>naver.com</Option>
+              <Option value='daum.net'>daum.net</Option>
+              <Option value='gmail.com'>gmail.com</Option>
+              <Option value='nate.com'>nate.com</Option>
+              <Option value='yahoo.co.kr'>yahoo.co.kr</Option>
+            </NomalSelect>
+          </Wrapper>
         </Container>
 
         <Container>
-          {isContentValid === false ? (
-            <span className='notice'>
-              <p>*</p>
-            </span>
-          ) : null}
-          <h4> 내용 </h4>
-          <textarea ref={enteredText} />
+          {isTitleValid === false ? <Notice /> : null}
+          <Label htmlFor='title'> 제목 </Label>
+          <NomalInput id='title' name='title' type='text' ref={enteredTitle} autocomplete='off' />
+        </Container>
+
+        <Container>
+          {isContentValid === false ? <Notice /> : null}
+          <Label htmlFor='content'> 내용 </Label>
+          <TextBox id='content' name='content' ref={enteredText} autocomplete='off' />
         </Container>
 
         <SubmitButton>
-          <button type='submit'>등록!!!!</button>
+          <Button type='submit'>
+            등록 <Image src='right.png' alt='right arrow' width={30} height={20} />
+          </Button>
         </SubmitButton>
       </Form>
       {isModal && (
-        <ContactModal valid={isValid} agree={agree} onClose={() => modalCloseHandler()} />
+        <ContactModal
+          valid={isValid}
+          agree={agree}
+          loading={loading}
+          error={Error}
+          onClose={() => modalCloseHandler()}
+        />
       )}
     </>
   );
