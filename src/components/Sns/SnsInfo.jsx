@@ -1,86 +1,66 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import H3 from "../../styles/H3";
+import Image from "../../styles/Image";
 
-const SnsContanier = styled.div`
+const SnsContanier = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90%;
-  margin: 5%;
-`;
-
-const InfoContanier = styled.div`
-  display: flex;
-  flex-direction: column;
-  a{
-    color: while;
+  &::before {
+    content: "";
+    width: 100%;
+    height: 0.15rem;
+    background-color: gray;
+    border-radius: 0.1rem;
   }
-  h4{
-    font-size: 1rem;
-    margin: 1rem 1.5rem;
-  }
-  p {
-    color: white;
-    font-size: 0.75rem;
-    line-height: 1.3;
-    margin:1rem 1.5rem;
-  }
-  ,
 `;
 
 const TitleContanier = styled.div`
   display: flex;
-  margin: 2rem;
+  margin: 0 0 2rem 0;
   align-items: center;
-  h3 {
-    font-size: 1.25rem;
-    padding: 0 1rem 0 0.5rem;
-  }
 `;
 
 const LinkContanier = styled.div`
   font-size: 0.6rem;
   display: flex;
-  margin: 1rem 0 2rem 0;
+  margin: 2rem 0 2rem 0;
   border: 2px solid white;
   border-radius: 1rem;
   background: ${props => props.background};
-  a {
-    padding: 0.5rem 0.2rem 0.5rem 0.5rem;
-    font-size: 1rem;
-    color: white;
-    text-decoration: none;
-  }
-  p {
-    display: flex;
-  }
-  img {
-    margin: 0.2rem 0.4rem 0.2rem 0;
-  }
+`;
+
+const Link = styled.a`
+  font-size: 1rem;
+  color: white;
+  text-decoration: none;
+  padding: 0.6rem 0.4rem;
 `;
 
 function SnsInfo({info, children}) {
-  const {name, imageAlt, image, linkTitle, link, title, summary, description, color} = info;
+  const {name, imageAlt, image, linkTitle, link, color} = info;
 
   return (
     <SnsContanier>
       <TitleContanier>
-        <img src={image} alt={imageAlt} width={35} height={30} />
-        <h3>{name}</h3>
+        <Image src={image} alt={imageAlt} width={35} height={30} />
+        <H3 margin='1.5rem 0 1.5rem 0.5rem '>{name}</H3>
       </TitleContanier>
       {children}
       <LinkContanier background={color}>
-        <p>
-          <a href={link}>{linkTitle} 바로가기</a>
-          <img src='Arrow.png' alt={imageAlt} width={20} height={25} />
-        </p>
+        <Link href={link}>{linkTitle} 바로가기</Link>
+        <Image
+          src='Arrow.png'
+          alt={imageAlt}
+          width={20}
+          height={25}
+          mt='0.4rem'
+          mb='0.4rem'
+          mr='0.4rem'
+        />
       </LinkContanier>
-      <InfoContanier>
-        <h4>{title}</h4>
-        <p>{summary}</p>
-        <p>{description}</p>
-      </InfoContanier>
     </SnsContanier>
   );
 }

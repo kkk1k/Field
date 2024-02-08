@@ -37,18 +37,7 @@ const HeaderContent = styled.div`
   animation: ${slideDownAnimation} 0.3s ease-in-out;
   padding: 0.5rem 0;
   z-index: 10;
-  button {
-    appearance: none;
-    border: none;
-    font-size: 2rem;
-    background: #000b26;
-    text-align: left;
-    padding: 0.8rem 1rem;
-    color: ${theme.colors.gray};
-  }
-  button:hover {
-    cursor: pointer;
-  }
+
   ${props =>
     props.activeButton &&
     `
@@ -57,6 +46,20 @@ const HeaderContent = styled.div`
       background: #091A45;
     }
   `}
+`;
+
+const Button = styled.button`
+  appearance: none;
+  border: none;
+  font-size: 2rem;
+  background: #000b26;
+  text-align: left;
+  padding: 0.8rem 1rem;
+  color: ${theme.colors.gray};
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export default function MenuContents({onOpen}) {
@@ -76,21 +79,21 @@ export default function MenuContents({onOpen}) {
     <>
       <HeaderBackground onClick={backgroundClickHandler} />
       <HeaderContent activeButton={location.pathname.replace("/", "")}>
-        <button type='button' name='about' onClick={directionHandler}>
+        <Button type='button' name='about' onClick={directionHandler}>
           About FIELD
-        </button>
-        <button type='button' name='camp' onClick={directionHandler}>
+        </Button>
+        <Button type='button' name='camp' onClick={directionHandler}>
           FIELD CAMP
-        </button>
-        <button type='button' name='news' onClick={directionHandler}>
+        </Button>
+        <Button type='button' name='news' onClick={directionHandler}>
           NEWS
-        </button>
-        <button type='button' name='sns' onClick={directionHandler}>
+        </Button>
+        <Button type='button' name='sns' onClick={directionHandler}>
           SNS
-        </button>
-        <button type='button' name='contact' onClick={directionHandler}>
+        </Button>
+        <Button type='button' name='contact' onClick={directionHandler}>
           CONTACT
-        </button>
+        </Button>
       </HeaderContent>
     </>
   );
