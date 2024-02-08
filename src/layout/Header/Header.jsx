@@ -46,6 +46,23 @@ const HomeLogo = styled.div`
   }
 `;
 
+const A = styled.div`
+  position: fixed;
+  bottom: 10rem;
+  padding: 1rem 0.2rem;
+  background: transparent;
+  right: 1rem;
+  z-index: 100;
+  border-radius: 2rem;
+  display: flex;
+  border: 2px solid black;
+  flex-direction: column;
+`;
+
+const Imag = styled.img`
+  padding: 0.3rem;
+`;
+
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -74,6 +91,11 @@ export default function Header() {
           <Burgur open={isOpen} />
         </Button>
       </TopInfo>
+      <A>
+        <Imag src='YoutubeLogo.png' alt='shit' width={40} height={40} />
+        <Imag src='InstagramLogo.png' alt='shit' width={36} height={40} />
+        <Imag src='KakaoTalkLogo.png' alt='shit' width={40} height={40} />
+      </A>
 
       {isOpen && <MenuContents onOpen={handleClick} />}
     </>
