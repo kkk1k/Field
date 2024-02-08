@@ -19,7 +19,6 @@ import BackgroundImage from "../styles/BackgroundImage";
 import FlexBox from "../styles/FlexBox";
 import FlexCenter from "../styles/FlexCenter";
 import H2 from "../styles/H2";
-import H3 from "../styles/H3";
 import Image from "../styles/Image";
 import Span from "../styles/Span";
 import SwiperContainer from "../styles/SwiperContainer";

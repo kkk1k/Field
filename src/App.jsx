@@ -11,6 +11,7 @@ import Contact from "./pages/Contact";
 import Layout from "./layout/Layout";
 import Album from "./pages/Album";
 import Sns from "./pages/Sns";
+import NewsDetail from "./pages/NewsDetail";
 import "./index.css";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path='/contact' element={<Contact />} />
           <Route path='/album' element={<Album />} />
           <Route path='/sns' element={<Sns />} />
+          <Route path='detail/:id' element={<NewsDetail />} />
         </Route>
       </Routes>
     </ThemeProvider>
