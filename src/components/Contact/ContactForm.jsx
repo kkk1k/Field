@@ -154,8 +154,6 @@ export default function ContactForm({agree}) {
           Title: title,
           Content: text,
         };
-        console.log(pb);
-        console.log(process.env.REACT_APP_URL);
 
         setLoading(true);
 
@@ -225,7 +223,6 @@ export default function ContactForm({agree}) {
     window.location.reload();
   }
 
-  console.log(process.env.REACT_APP_URL);
   return (
     <>
       <Form onSubmit={event => enteredHandler(event)}>
